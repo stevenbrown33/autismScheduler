@@ -22,6 +22,12 @@
 		DFC9F682208504D1000A7452 /* ChildController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F681208504D1000A7452 /* ChildController.swift */; };
 		DFC9F684208504DD000A7452 /* ActivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F683208504DD000A7452 /* ActivityController.swift */; };
 		DFC9F686208504E8000A7452 /* TaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F685208504E8000A7452 /* TaskController.swift */; };
+		DFC9F689208516C1000A7452 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F688208516C1000A7452 /* MainViewController.swift */; };
+		DFC9F68B20851DC8000A7452 /* ChildCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F68A20851DC8000A7452 /* ChildCollectionViewCell.swift */; };
+		DFC9F68D20851E42000A7452 /* NoChildCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F68C20851E42000A7452 /* NoChildCollectionViewCell.swift */; };
+		DFC9F68F20853F3A000A7452 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F68E20853F3A000A7452 /* UserDefaultsExtension.swift */; };
+		DFC9F69120854236000A7452 /* CloudKitSynchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F69020854236000A7452 /* CloudKitSynchable.swift */; };
+		DFC9F69320856821000A7452 /* AddChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F69220856821000A7452 /* AddChildViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +61,12 @@
 		DFC9F681208504D1000A7452 /* ChildController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildController.swift; sourceTree = "<group>"; };
 		DFC9F683208504DD000A7452 /* ActivityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityController.swift; sourceTree = "<group>"; };
 		DFC9F685208504E8000A7452 /* TaskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskController.swift; sourceTree = "<group>"; };
+		DFC9F688208516C1000A7452 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		DFC9F68A20851DC8000A7452 /* ChildCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildCollectionViewCell.swift; sourceTree = "<group>"; };
+		DFC9F68C20851E42000A7452 /* NoChildCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoChildCollectionViewCell.swift; sourceTree = "<group>"; };
+		DFC9F68E20853F3A000A7452 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
+		DFC9F69020854236000A7452 /* CloudKitSynchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitSynchable.swift; sourceTree = "<group>"; };
+		DFC9F69220856821000A7452 /* AddChildViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChildViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +145,8 @@
 			isa = PBXGroup;
 			children = (
 				DFC9F64C2084FAD0000A7452 /* Main.storyboard */,
+				DFC9F68A20851DC8000A7452 /* ChildCollectionViewCell.swift */,
+				DFC9F68C20851E42000A7452 /* NoChildCollectionViewCell.swift */,
 			);
 			path = "Views and Storyboards";
 			sourceTree = "<group>";
@@ -140,6 +154,8 @@
 		DFC9F66A2084FC48000A7452 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				DFC9F688208516C1000A7452 /* MainViewController.swift */,
+				DFC9F69220856821000A7452 /* AddChildViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -163,6 +179,7 @@
 				DFC9F677208503D7000A7452 /* Child+Convenience.swift */,
 				DFC9F679208503E5000A7452 /* Activity+Conveneince.swift */,
 				DFC9F67B208503F5000A7452 /* Task+Convenience.swift */,
+				DFC9F69020854236000A7452 /* CloudKitSynchable.swift */,
 			);
 			path = "Models+CoreData";
 			sourceTree = "<group>";
@@ -178,6 +195,7 @@
 		DFC9F68720850527000A7452 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				DFC9F68E20853F3A000A7452 /* UserDefaultsExtension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -292,15 +310,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				DFC9F67E20850414000A7452 /* CoreDataStack.swift in Sources */,
+				DFC9F689208516C1000A7452 /* MainViewController.swift in Sources */,
 				DFC9F682208504D1000A7452 /* ChildController.swift in Sources */,
+				DFC9F69320856821000A7452 /* AddChildViewController.swift in Sources */,
 				DFC9F6762084FE7E000A7452 /* AutismScheduler.xcdatamodeld in Sources */,
+				DFC9F69120854236000A7452 /* CloudKitSynchable.swift in Sources */,
 				DFC9F680208504BF000A7452 /* CloudKitManager.swift in Sources */,
 				DFC9F67A208503E5000A7452 /* Activity+Conveneince.swift in Sources */,
 				DFC9F67C208503F5000A7452 /* Task+Convenience.swift in Sources */,
+				DFC9F68D20851E42000A7452 /* NoChildCollectionViewCell.swift in Sources */,
 				DFC9F686208504E8000A7452 /* TaskController.swift in Sources */,
 				DFC9F678208503D7000A7452 /* Child+Convenience.swift in Sources */,
 				DFC9F684208504DD000A7452 /* ActivityController.swift in Sources */,
 				DFC9F6492084FAD0000A7452 /* AppDelegate.swift in Sources */,
+				DFC9F68F20853F3A000A7452 /* UserDefaultsExtension.swift in Sources */,
+				DFC9F68B20851DC8000A7452 /* ChildCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

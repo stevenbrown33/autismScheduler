@@ -18,7 +18,8 @@ extension Child {
     }
     
     @discardableResult convenience init(name: String,
-                                        image: UIImage? = nil,
+                                        image: UIImage?,
+                                        birthday: Date?,
                                         context: NSManagedObjectContext = CoreDataStack.context) {
         self.init(context: context)
         self.name = name
@@ -26,5 +27,9 @@ extension Child {
             let imageData = UIImageJPEGRepresentation(image, 1)
             self.imageData = imageData
         }
+        self.birthday = birthday
+        lastModificationTimestamp = Date().timeIntervalSince1970
     }
 }
+
+extension Child: CloudKitSynchable {}
