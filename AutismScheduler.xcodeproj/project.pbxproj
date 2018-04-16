@@ -8,11 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		DFC9F6492084FAD0000A7452 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F6482084FAD0000A7452 /* AppDelegate.swift */; };
-		DFC9F64B2084FAD0000A7452 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F64A2084FAD0000A7452 /* ViewController.swift */; };
 		DFC9F64E2084FAD0000A7452 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFC9F64C2084FAD0000A7452 /* Main.storyboard */; };
 		DFC9F6502084FAD6000A7452 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFC9F64F2084FAD6000A7452 /* Assets.xcassets */; };
 		DFC9F6532084FAD6000A7452 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFC9F6512084FAD6000A7452 /* LaunchScreen.storyboard */; };
 		DFC9F65E2084FAD6000A7452 /* AutismSchedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F65D2084FAD6000A7452 /* AutismSchedulerTests.swift */; };
+		DFC9F6702084FD2B000A7452 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFC9F66F2084FD2B000A7452 /* CloudKit.framework */; };
+		DFC9F6762084FE7E000A7452 /* AutismScheduler.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F6742084FE7E000A7452 /* AutismScheduler.xcdatamodeld */; };
+		DFC9F678208503D7000A7452 /* Child+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F677208503D7000A7452 /* Child+Convenience.swift */; };
+		DFC9F67A208503E5000A7452 /* Activity+Conveneince.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F679208503E5000A7452 /* Activity+Conveneince.swift */; };
+		DFC9F67C208503F5000A7452 /* Task+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F67B208503F5000A7452 /* Task+Convenience.swift */; };
+		DFC9F67E20850414000A7452 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F67D20850414000A7452 /* CoreDataStack.swift */; };
+		DFC9F680208504BF000A7452 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F67F208504BF000A7452 /* CloudKitManager.swift */; };
+		DFC9F682208504D1000A7452 /* ChildController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F681208504D1000A7452 /* ChildController.swift */; };
+		DFC9F684208504DD000A7452 /* ActivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F683208504DD000A7452 /* ActivityController.swift */; };
+		DFC9F686208504E8000A7452 /* TaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F685208504E8000A7452 /* TaskController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,7 +37,6 @@
 /* Begin PBXFileReference section */
 		DFC9F6452084FAD0000A7452 /* AutismScheduler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutismScheduler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFC9F6482084FAD0000A7452 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		DFC9F64A2084FAD0000A7452 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DFC9F64D2084FAD0000A7452 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DFC9F64F2084FAD6000A7452 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DFC9F6522084FAD6000A7452 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -36,6 +44,17 @@
 		DFC9F6592084FAD6000A7452 /* AutismSchedulerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AutismSchedulerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFC9F65D2084FAD6000A7452 /* AutismSchedulerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutismSchedulerTests.swift; sourceTree = "<group>"; };
 		DFC9F65F2084FAD6000A7452 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DFC9F66D2084FD20000A7452 /* AutismScheduler.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AutismScheduler.entitlements; sourceTree = "<group>"; };
+		DFC9F66F2084FD2B000A7452 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		DFC9F6752084FE7E000A7452 /* AutismScheduler.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AutismScheduler.xcdatamodel; sourceTree = "<group>"; };
+		DFC9F677208503D7000A7452 /* Child+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Child+Convenience.swift"; sourceTree = "<group>"; };
+		DFC9F679208503E5000A7452 /* Activity+Conveneince.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+Conveneince.swift"; sourceTree = "<group>"; };
+		DFC9F67B208503F5000A7452 /* Task+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+Convenience.swift"; sourceTree = "<group>"; };
+		DFC9F67D20850414000A7452 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		DFC9F67F208504BF000A7452 /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
+		DFC9F681208504D1000A7452 /* ChildController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildController.swift; sourceTree = "<group>"; };
+		DFC9F683208504DD000A7452 /* ActivityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityController.swift; sourceTree = "<group>"; };
+		DFC9F685208504E8000A7452 /* TaskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFC9F6702084FD2B000A7452 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +82,7 @@
 				DFC9F6472084FAD0000A7452 /* AutismScheduler */,
 				DFC9F65C2084FAD6000A7452 /* AutismSchedulerTests */,
 				DFC9F6462084FAD0000A7452 /* Products */,
+				DFC9F66E2084FD2B000A7452 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,12 +98,12 @@
 		DFC9F6472084FAD0000A7452 /* AutismScheduler */ = {
 			isa = PBXGroup;
 			children = (
-				DFC9F6482084FAD0000A7452 /* AppDelegate.swift */,
-				DFC9F64A2084FAD0000A7452 /* ViewController.swift */,
-				DFC9F64C2084FAD0000A7452 /* Main.storyboard */,
-				DFC9F64F2084FAD6000A7452 /* Assets.xcassets */,
-				DFC9F6512084FAD6000A7452 /* LaunchScreen.storyboard */,
-				DFC9F6542084FAD6000A7452 /* Info.plist */,
+				DFC9F66C2084FC55000A7452 /* Models+CoreData */,
+				DFC9F66B2084FC50000A7452 /* Model Controllers */,
+				DFC9F66A2084FC48000A7452 /* View Controllers */,
+				DFC9F6692084FC24000A7452 /* Views and Storyboards */,
+				DFC9F6682084FC06000A7452 /* Resources */,
+				DFC9F66D2084FD20000A7452 /* AutismScheduler.entitlements */,
 			);
 			path = AutismScheduler;
 			sourceTree = "<group>";
@@ -94,6 +115,71 @@
 				DFC9F65F2084FAD6000A7452 /* Info.plist */,
 			);
 			path = AutismSchedulerTests;
+			sourceTree = "<group>";
+		};
+		DFC9F6682084FC06000A7452 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DFC9F68720850527000A7452 /* Helpers */,
+				DFC9F6482084FAD0000A7452 /* AppDelegate.swift */,
+				DFC9F64F2084FAD6000A7452 /* Assets.xcassets */,
+				DFC9F6512084FAD6000A7452 /* LaunchScreen.storyboard */,
+				DFC9F6542084FAD6000A7452 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		DFC9F6692084FC24000A7452 /* Views and Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				DFC9F64C2084FAD0000A7452 /* Main.storyboard */,
+			);
+			path = "Views and Storyboards";
+			sourceTree = "<group>";
+		};
+		DFC9F66A2084FC48000A7452 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		DFC9F66B2084FC50000A7452 /* Model Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				DFC9F67F208504BF000A7452 /* CloudKitManager.swift */,
+				DFC9F681208504D1000A7452 /* ChildController.swift */,
+				DFC9F683208504DD000A7452 /* ActivityController.swift */,
+				DFC9F685208504E8000A7452 /* TaskController.swift */,
+			);
+			path = "Model Controllers";
+			sourceTree = "<group>";
+		};
+		DFC9F66C2084FC55000A7452 /* Models+CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				DFC9F6742084FE7E000A7452 /* AutismScheduler.xcdatamodeld */,
+				DFC9F67D20850414000A7452 /* CoreDataStack.swift */,
+				DFC9F677208503D7000A7452 /* Child+Convenience.swift */,
+				DFC9F679208503E5000A7452 /* Activity+Conveneince.swift */,
+				DFC9F67B208503F5000A7452 /* Task+Convenience.swift */,
+			);
+			path = "Models+CoreData";
+			sourceTree = "<group>";
+		};
+		DFC9F66E2084FD2B000A7452 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DFC9F66F2084FD2B000A7452 /* CloudKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DFC9F68720850527000A7452 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,6 +232,14 @@
 				TargetAttributes = {
 					DFC9F6442084FAD0000A7452 = {
 						CreatedOnToolsVersion = 9.3;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					DFC9F6582084FAD6000A7452 = {
 						CreatedOnToolsVersion = 9.3;
@@ -197,7 +291,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DFC9F64B2084FAD0000A7452 /* ViewController.swift in Sources */,
+				DFC9F67E20850414000A7452 /* CoreDataStack.swift in Sources */,
+				DFC9F682208504D1000A7452 /* ChildController.swift in Sources */,
+				DFC9F6762084FE7E000A7452 /* AutismScheduler.xcdatamodeld in Sources */,
+				DFC9F680208504BF000A7452 /* CloudKitManager.swift in Sources */,
+				DFC9F67A208503E5000A7452 /* Activity+Conveneince.swift in Sources */,
+				DFC9F67C208503F5000A7452 /* Task+Convenience.swift in Sources */,
+				DFC9F686208504E8000A7452 /* TaskController.swift in Sources */,
+				DFC9F678208503D7000A7452 /* Child+Convenience.swift in Sources */,
+				DFC9F684208504DD000A7452 /* ActivityController.swift in Sources */,
 				DFC9F6492084FAD0000A7452 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,9 +460,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = AutismScheduler/AutismScheduler.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5H5Z34E2S5;
-				INFOPLIST_FILE = AutismScheduler/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/AutismScheduler/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -376,9 +479,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = AutismScheduler/AutismScheduler.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5H5Z34E2S5;
-				INFOPLIST_FILE = AutismScheduler/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/AutismScheduler/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -463,6 +567,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		DFC9F6742084FE7E000A7452 /* AutismScheduler.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DFC9F6752084FE7E000A7452 /* AutismScheduler.xcdatamodel */,
+			);
+			currentVersion = DFC9F6752084FE7E000A7452 /* AutismScheduler.xcdatamodel */;
+			path = AutismScheduler.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = DFC9F63D2084FAD0000A7452 /* Project object */;
 }
