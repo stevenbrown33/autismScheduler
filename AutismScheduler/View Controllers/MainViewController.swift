@@ -15,12 +15,19 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet weak var viewAndAssignButton: UIButton!
     @IBOutlet weak var createActivityButton: UIButton!
     @IBOutlet weak var createTaskButton: UIButton!
-    var children:[Child] = []
     let childController = ChildController.shared
+    var children = ChildController.shared.children
     
     override func viewDidLoad() {
         super.viewDidLoad()
         formatCollectionView()
+        childController.loadCloudBackup()
+        collectionView.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView.reloadData()
     }
     
     func formatCollectionView() {
@@ -53,13 +60,19 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         if children.count == 0 {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "noChildCell", for: indexPath) as? NoChildCollectionViewCell else { return UICollectionViewCell() }
             collectionView.allowsSelection = false
+            collectionView.isScrollEnabled = false
             return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "childCell", for: indexPath) as? ChildCollectionViewCell else { return UICollectionViewCell() }
             let child = children[indexPath.row]
             cell.childImageView.image = child.image
             cell.childNameLabel.text = child.name
-            collectionView.allowsSelection = true
+            if collectionView.allowsSelection != true {
+                collectionView.allowsSelection = true
+            }
+            if collectionView.isScrollEnabled != true {
+                collectionView.isScrollEnabled = true
+            }
             return cell
         }
     }

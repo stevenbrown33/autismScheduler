@@ -21,7 +21,7 @@ class ChildController {
     weak var delegate: ChildControllerDelegate?
     static let shared = ChildController()
     private let context = CoreDataStack.context
-    var currentChild: Child?
+//    var currentChild: Child?
     
     private init() {
         CloudKitManager.shared.fetchChanges { (success) in
@@ -30,8 +30,8 @@ class ChildController {
     }
     
     // MARK: - CRUD
-    func addChild(withName name: String, withImage image: UIImage?, andWithBirthday birthday: Date?) -> Child {
-        let child = Child(name: name, image: image, birthday: birthday)
+    func addChild(withName name: String) -> Child {
+        let child = Child(name: name)
         save()
         return child
     }
@@ -40,9 +40,17 @@ class ChildController {
         return children.first(where: {$0.recordName == recordName})
     }
     
-    func updateChild(_ child: Child, withName name: String, withBirthday birthday: Date) {
+    func updateChild(_ child: Child, withName name: String) {
         child.name = name
-        child.birthday = birthday
+        child.lastModificationTimestamp = Date().timeIntervalSince1970
+        child.recordModified = true
+        save()
+    }
+    
+    func updateChildImage(for child: Child, toImage image: UIImage) {
+        child.imageData = UIImageJPEGRepresentation(image, 1)
+        child.lastModificationTimestamp = Date().timeIntervalSince1970
+        child.recordModified = true
         save()
     }
     

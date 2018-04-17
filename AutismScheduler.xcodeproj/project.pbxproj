@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DF42B93A208684F800C015E4 /* Child.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF42B939208684F800C015E4 /* Child.swift */; };
+		DF42B93C208686FA00C015E4 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF42B93B208686FA00C015E4 /* Activity.swift */; };
 		DFC9F6492084FAD0000A7452 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F6482084FAD0000A7452 /* AppDelegate.swift */; };
 		DFC9F64E2084FAD0000A7452 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFC9F64C2084FAD0000A7452 /* Main.storyboard */; };
 		DFC9F6502084FAD6000A7452 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFC9F64F2084FAD6000A7452 /* Assets.xcassets */; };
@@ -41,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DF42B939208684F800C015E4 /* Child.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Child.swift; sourceTree = "<group>"; };
+		DF42B93B208686FA00C015E4 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		DFC9F6452084FAD0000A7452 /* AutismScheduler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutismScheduler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFC9F6482084FAD0000A7452 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DFC9F64D2084FAD0000A7452 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -180,6 +184,8 @@
 				DFC9F679208503E5000A7452 /* Activity+Conveneince.swift */,
 				DFC9F67B208503F5000A7452 /* Task+Convenience.swift */,
 				DFC9F69020854236000A7452 /* CloudKitSynchable.swift */,
+				DF42B939208684F800C015E4 /* Child.swift */,
+				DF42B93B208686FA00C015E4 /* Activity.swift */,
 			);
 			path = "Models+CoreData";
 			sourceTree = "<group>";
@@ -315,10 +321,12 @@
 				DFC9F69320856821000A7452 /* AddChildViewController.swift in Sources */,
 				DFC9F6762084FE7E000A7452 /* AutismScheduler.xcdatamodeld in Sources */,
 				DFC9F69120854236000A7452 /* CloudKitSynchable.swift in Sources */,
+				DF42B93C208686FA00C015E4 /* Activity.swift in Sources */,
 				DFC9F680208504BF000A7452 /* CloudKitManager.swift in Sources */,
 				DFC9F67A208503E5000A7452 /* Activity+Conveneince.swift in Sources */,
 				DFC9F67C208503F5000A7452 /* Task+Convenience.swift in Sources */,
 				DFC9F68D20851E42000A7452 /* NoChildCollectionViewCell.swift in Sources */,
+				DF42B93A208684F800C015E4 /* Child.swift in Sources */,
 				DFC9F686208504E8000A7452 /* TaskController.swift in Sources */,
 				DFC9F678208503D7000A7452 /* Child+Convenience.swift in Sources */,
 				DFC9F684208504DD000A7452 /* ActivityController.swift in Sources */,

@@ -10,7 +10,6 @@
         <relationship name="task" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Task" inverseName="activity" inverseEntity="Task" syncable="YES"/>
     </entity>
     <entity name="Child" representedClassName="Child" syncable="YES" codeGenerationType="class">
-        <attribute name="birthday" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="lastModificationTimestamp" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -28,7 +27,7 @@
     </entity>
     <elements>
         <element name="Activity" positionX="-54" positionY="-9" width="128" height="150"/>
-        <element name="Child" positionX="178" positionY="-72" width="128" height="150"/>
+        <element name="Child" positionX="178" positionY="-72" width="128" height="135"/>
         <element name="Task" positionX="207" positionY="93" width="128" height="135"/>
     </elements>
 </model>
