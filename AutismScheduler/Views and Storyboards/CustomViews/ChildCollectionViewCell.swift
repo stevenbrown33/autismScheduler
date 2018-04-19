@@ -12,5 +12,16 @@ class ChildCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var childImageView: UIImageView!
     @IBOutlet weak var childNameLabel: UILabel!
+    var child: Child? {
+        didSet {
+            updateViews()
+        }
+    }
+    
+    func updateViews() {
+        guard let child = child else { return }
+        childNameLabel.text = child.name
+        childImageView.image = child.image
+    }
     
 }

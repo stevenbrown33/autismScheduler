@@ -8,26 +8,57 @@
 
 import UIKit
 
-class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, AddChildDelegate, ChildControllerDelegate {
     
     // MARK: - Properties
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var viewAndAssignButton: UIButton!
-    @IBOutlet weak var createActivityButton: UIButton!
-    @IBOutlet weak var createTaskButton: UIButton!
+    @IBOutlet weak var addChildButton: UIButton!
+    
+    var children:[Child] = []
     let childController = ChildController.shared
-    var children = ChildController.shared.children
     
     override func viewDidLoad() {
         super.viewDidLoad()
         formatCollectionView()
-        childController.loadCloudBackup()
+        //formatAddChildButton()
+        notification()
         collectionView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = true
+        navigationController?.isNavigationBarHidden = true
         collectionView.reloadData()
+        childrenUpdated()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        tabBarController?.tabBar.isHidden = false
+        navigationController?.isNavigationBarHidden = false
+    }
+    
+    func formatAddChildButton() {
+        addChildButton.layer.cornerRadius = 20
+        addChildButton.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+        addChildButton.tintColor = .white
+    }
+    
+    func childrenUpdated() {
+        children = childController.children
+        collectionView.reloadData()
+    }
+    
+    func notification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshViews), name: childrenWereSetNotification, object: nil)
+    }
+    
+    @objc func refreshViews() {
+        collectionView.reloadData()
+    }
+    
+    @IBAction func addChildButtonTapped(_ sender: UIButton) {
     }
     
     func formatCollectionView() {
@@ -37,36 +68,33 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if children.count == 0 {
-            let height = (view.frame.height * (1/3))
-            let width = (view.frame.width * (9/10))
-            return CGSize(width: width, height: height)
-        } else {
-            let height = (view.frame.height * (1/3))
-            let width = height
-            return CGSize(width: width, height: height)
-        }
+        let height = view.frame.height * 0.4
+        let width = view.frame.width * 0.8
+        return CGSize(width: width, height: height)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if children.count == 0 {
+        if childController.children.count == 0 {
             return 1
         } else {
-            return children.count
+            return childController.children.count
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if children.count == 0 {
+        if childController.children.count == 0 {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "noChildCell", for: indexPath) as? NoChildCollectionViewCell else { return UICollectionViewCell() }
-            collectionView.allowsSelection = false
-            collectionView.isScrollEnabled = false
+            if collectionView.allowsSelection == true {
+                collectionView.allowsSelection = false
+            }
+            if collectionView.isScrollEnabled == true {
+                collectionView.isScrollEnabled = false
+            }
             return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "childCell", for: indexPath) as? ChildCollectionViewCell else { return UICollectionViewCell() }
-            let child = children[indexPath.row]
-            cell.childImageView.image = child.image
-            cell.childNameLabel.text = child.name
+            let child = childController.children[indexPath.row]
+            cell.child = child
             if collectionView.allowsSelection != true {
                 collectionView.allowsSelection = true
             }
@@ -77,14 +105,23 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
     }
     
-    /*
      // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toChildDetail",
+            let indexPath = collectionView.indexPath(for: sender as! UICollectionViewCell) {
+            let detailVC = segue.destination as? UINavigationController
+            let addChildVC = detailVC?.viewControllers.first as? AddChildViewController
+            let child = childController.children[indexPath.row]
+            addChildVC?.child = child
+            addChildVC?.delegate = self
+        } else if segue.identifier == "toAddChild" {
+            let detailVC = segue.destination as? UINavigationController
+            let addChildVC = detailVC?.viewControllers.first as? AddChildViewController
+            addChildVC?.delegate = self
+        }
      }
-     */
     
+    func viewActivities() {
+        tabBarController?.selectedIndex = 1
+    }
 }

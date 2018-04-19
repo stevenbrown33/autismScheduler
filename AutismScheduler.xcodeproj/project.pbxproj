@@ -9,26 +9,28 @@
 /* Begin PBXBuildFile section */
 		DF42B93A208684F800C015E4 /* Child.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF42B939208684F800C015E4 /* Child.swift */; };
 		DF42B93C208686FA00C015E4 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF42B93B208686FA00C015E4 /* Activity.swift */; };
+		DF42B93E20868B3A00C015E4 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF42B93D20868B3A00C015E4 /* Task.swift */; };
+		DF42B94020868E4500C015E4 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF42B93F20868E4500C015E4 /* CloudKitManager.swift */; };
+		DF42B9422087C01B00C015E4 /* TabBarController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF42B9412087C01B00C015E4 /* TabBarController.storyboard */; };
+		DF42B9462087C10700C015E4 /* ActivityList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF42B9452087C10700C015E4 /* ActivityList.storyboard */; };
+		DF42B9482087C11300C015E4 /* TaskList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF42B9472087C11300C015E4 /* TaskList.storyboard */; };
+		DF42B94A2087C11F00C015E4 /* ActivityDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF42B9492087C11F00C015E4 /* ActivityDetail.storyboard */; };
+		DF42B94C2087E82100C015E4 /* AddChild.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF42B94B2087E82100C015E4 /* AddChild.storyboard */; };
+		DF42B94E2088F36300C015E4 /* ActivityListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF42B94D2088F36300C015E4 /* ActivityListViewController.swift */; };
+		DF42B9502088F76400C015E4 /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF42B94F2088F76400C015E4 /* TaskListViewController.swift */; };
+		DF42B9522088F77A00C015E4 /* ActivityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF42B9512088F77A00C015E4 /* ActivityDetailViewController.swift */; };
 		DFC9F6492084FAD0000A7452 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F6482084FAD0000A7452 /* AppDelegate.swift */; };
 		DFC9F64E2084FAD0000A7452 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFC9F64C2084FAD0000A7452 /* Main.storyboard */; };
 		DFC9F6502084FAD6000A7452 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFC9F64F2084FAD6000A7452 /* Assets.xcassets */; };
 		DFC9F6532084FAD6000A7452 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFC9F6512084FAD6000A7452 /* LaunchScreen.storyboard */; };
 		DFC9F65E2084FAD6000A7452 /* AutismSchedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F65D2084FAD6000A7452 /* AutismSchedulerTests.swift */; };
 		DFC9F6702084FD2B000A7452 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFC9F66F2084FD2B000A7452 /* CloudKit.framework */; };
-		DFC9F6762084FE7E000A7452 /* AutismScheduler.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F6742084FE7E000A7452 /* AutismScheduler.xcdatamodeld */; };
-		DFC9F678208503D7000A7452 /* Child+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F677208503D7000A7452 /* Child+Convenience.swift */; };
-		DFC9F67A208503E5000A7452 /* Activity+Conveneince.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F679208503E5000A7452 /* Activity+Conveneince.swift */; };
-		DFC9F67C208503F5000A7452 /* Task+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F67B208503F5000A7452 /* Task+Convenience.swift */; };
-		DFC9F67E20850414000A7452 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F67D20850414000A7452 /* CoreDataStack.swift */; };
-		DFC9F680208504BF000A7452 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F67F208504BF000A7452 /* CloudKitManager.swift */; };
 		DFC9F682208504D1000A7452 /* ChildController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F681208504D1000A7452 /* ChildController.swift */; };
 		DFC9F684208504DD000A7452 /* ActivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F683208504DD000A7452 /* ActivityController.swift */; };
 		DFC9F686208504E8000A7452 /* TaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F685208504E8000A7452 /* TaskController.swift */; };
 		DFC9F689208516C1000A7452 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F688208516C1000A7452 /* MainViewController.swift */; };
 		DFC9F68B20851DC8000A7452 /* ChildCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F68A20851DC8000A7452 /* ChildCollectionViewCell.swift */; };
 		DFC9F68D20851E42000A7452 /* NoChildCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F68C20851E42000A7452 /* NoChildCollectionViewCell.swift */; };
-		DFC9F68F20853F3A000A7452 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F68E20853F3A000A7452 /* UserDefaultsExtension.swift */; };
-		DFC9F69120854236000A7452 /* CloudKitSynchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F69020854236000A7452 /* CloudKitSynchable.swift */; };
 		DFC9F69320856821000A7452 /* AddChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F69220856821000A7452 /* AddChildViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +47,16 @@
 /* Begin PBXFileReference section */
 		DF42B939208684F800C015E4 /* Child.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Child.swift; sourceTree = "<group>"; };
 		DF42B93B208686FA00C015E4 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
+		DF42B93D20868B3A00C015E4 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		DF42B93F20868E4500C015E4 /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
+		DF42B9412087C01B00C015E4 /* TabBarController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabBarController.storyboard; sourceTree = "<group>"; };
+		DF42B9452087C10700C015E4 /* ActivityList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ActivityList.storyboard; sourceTree = "<group>"; };
+		DF42B9472087C11300C015E4 /* TaskList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TaskList.storyboard; sourceTree = "<group>"; };
+		DF42B9492087C11F00C015E4 /* ActivityDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ActivityDetail.storyboard; sourceTree = "<group>"; };
+		DF42B94B2087E82100C015E4 /* AddChild.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddChild.storyboard; sourceTree = "<group>"; };
+		DF42B94D2088F36300C015E4 /* ActivityListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityListViewController.swift; sourceTree = "<group>"; };
+		DF42B94F2088F76400C015E4 /* TaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
+		DF42B9512088F77A00C015E4 /* ActivityDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailViewController.swift; sourceTree = "<group>"; };
 		DFC9F6452084FAD0000A7452 /* AutismScheduler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutismScheduler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFC9F6482084FAD0000A7452 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DFC9F64D2084FAD0000A7452 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -56,20 +68,12 @@
 		DFC9F65F2084FAD6000A7452 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DFC9F66D2084FD20000A7452 /* AutismScheduler.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AutismScheduler.entitlements; sourceTree = "<group>"; };
 		DFC9F66F2084FD2B000A7452 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
-		DFC9F6752084FE7E000A7452 /* AutismScheduler.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AutismScheduler.xcdatamodel; sourceTree = "<group>"; };
-		DFC9F677208503D7000A7452 /* Child+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Child+Convenience.swift"; sourceTree = "<group>"; };
-		DFC9F679208503E5000A7452 /* Activity+Conveneince.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+Conveneince.swift"; sourceTree = "<group>"; };
-		DFC9F67B208503F5000A7452 /* Task+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+Convenience.swift"; sourceTree = "<group>"; };
-		DFC9F67D20850414000A7452 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
-		DFC9F67F208504BF000A7452 /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
 		DFC9F681208504D1000A7452 /* ChildController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildController.swift; sourceTree = "<group>"; };
 		DFC9F683208504DD000A7452 /* ActivityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityController.swift; sourceTree = "<group>"; };
 		DFC9F685208504E8000A7452 /* TaskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskController.swift; sourceTree = "<group>"; };
 		DFC9F688208516C1000A7452 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		DFC9F68A20851DC8000A7452 /* ChildCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildCollectionViewCell.swift; sourceTree = "<group>"; };
 		DFC9F68C20851E42000A7452 /* NoChildCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoChildCollectionViewCell.swift; sourceTree = "<group>"; };
-		DFC9F68E20853F3A000A7452 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
-		DFC9F69020854236000A7452 /* CloudKitSynchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitSynchable.swift; sourceTree = "<group>"; };
 		DFC9F69220856821000A7452 /* AddChildViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChildViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,6 +96,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DF42B9432087C0DE00C015E4 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				DF42B9412087C01B00C015E4 /* TabBarController.storyboard */,
+				DFC9F64C2084FAD0000A7452 /* Main.storyboard */,
+				DF42B94B2087E82100C015E4 /* AddChild.storyboard */,
+				DF42B9452087C10700C015E4 /* ActivityList.storyboard */,
+				DF42B9472087C11300C015E4 /* TaskList.storyboard */,
+				DF42B9492087C11F00C015E4 /* ActivityDetail.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		DF42B9442087C0E900C015E4 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				DFC9F68A20851DC8000A7452 /* ChildCollectionViewCell.swift */,
+				DFC9F68C20851E42000A7452 /* NoChildCollectionViewCell.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
 		DFC9F63C2084FAD0000A7452 = {
 			isa = PBXGroup;
 			children = (
@@ -114,7 +140,7 @@
 		DFC9F6472084FAD0000A7452 /* AutismScheduler */ = {
 			isa = PBXGroup;
 			children = (
-				DFC9F66C2084FC55000A7452 /* Models+CoreData */,
+				DFC9F66C2084FC55000A7452 /* Models */,
 				DFC9F66B2084FC50000A7452 /* Model Controllers */,
 				DFC9F66A2084FC48000A7452 /* View Controllers */,
 				DFC9F6692084FC24000A7452 /* Views and Storyboards */,
@@ -148,9 +174,8 @@
 		DFC9F6692084FC24000A7452 /* Views and Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				DFC9F64C2084FAD0000A7452 /* Main.storyboard */,
-				DFC9F68A20851DC8000A7452 /* ChildCollectionViewCell.swift */,
-				DFC9F68C20851E42000A7452 /* NoChildCollectionViewCell.swift */,
+				DF42B9432087C0DE00C015E4 /* Storyboards */,
+				DF42B9442087C0E900C015E4 /* CustomViews */,
 			);
 			path = "Views and Storyboards";
 			sourceTree = "<group>";
@@ -160,6 +185,9 @@
 			children = (
 				DFC9F688208516C1000A7452 /* MainViewController.swift */,
 				DFC9F69220856821000A7452 /* AddChildViewController.swift */,
+				DF42B94D2088F36300C015E4 /* ActivityListViewController.swift */,
+				DF42B94F2088F76400C015E4 /* TaskListViewController.swift */,
+				DF42B9512088F77A00C015E4 /* ActivityDetailViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -167,7 +195,6 @@
 		DFC9F66B2084FC50000A7452 /* Model Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				DFC9F67F208504BF000A7452 /* CloudKitManager.swift */,
 				DFC9F681208504D1000A7452 /* ChildController.swift */,
 				DFC9F683208504DD000A7452 /* ActivityController.swift */,
 				DFC9F685208504E8000A7452 /* TaskController.swift */,
@@ -175,19 +202,14 @@
 			path = "Model Controllers";
 			sourceTree = "<group>";
 		};
-		DFC9F66C2084FC55000A7452 /* Models+CoreData */ = {
+		DFC9F66C2084FC55000A7452 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				DFC9F6742084FE7E000A7452 /* AutismScheduler.xcdatamodeld */,
-				DFC9F67D20850414000A7452 /* CoreDataStack.swift */,
-				DFC9F677208503D7000A7452 /* Child+Convenience.swift */,
-				DFC9F679208503E5000A7452 /* Activity+Conveneince.swift */,
-				DFC9F67B208503F5000A7452 /* Task+Convenience.swift */,
-				DFC9F69020854236000A7452 /* CloudKitSynchable.swift */,
 				DF42B939208684F800C015E4 /* Child.swift */,
 				DF42B93B208686FA00C015E4 /* Activity.swift */,
+				DF42B93D20868B3A00C015E4 /* Task.swift */,
 			);
-			path = "Models+CoreData";
+			path = Models;
 			sourceTree = "<group>";
 		};
 		DFC9F66E2084FD2B000A7452 /* Frameworks */ = {
@@ -201,7 +223,7 @@
 		DFC9F68720850527000A7452 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				DFC9F68E20853F3A000A7452 /* UserDefaultsExtension.swift */,
+				DF42B93F20868E4500C015E4 /* CloudKitManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -297,7 +319,12 @@
 			files = (
 				DFC9F6532084FAD6000A7452 /* LaunchScreen.storyboard in Resources */,
 				DFC9F6502084FAD6000A7452 /* Assets.xcassets in Resources */,
+				DF42B9422087C01B00C015E4 /* TabBarController.storyboard in Resources */,
 				DFC9F64E2084FAD0000A7452 /* Main.storyboard in Resources */,
+				DF42B94A2087C11F00C015E4 /* ActivityDetail.storyboard in Resources */,
+				DF42B9462087C10700C015E4 /* ActivityList.storyboard in Resources */,
+				DF42B9482087C11300C015E4 /* TaskList.storyboard in Resources */,
+				DF42B94C2087E82100C015E4 /* AddChild.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,24 +342,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DFC9F67E20850414000A7452 /* CoreDataStack.swift in Sources */,
+				DF42B9522088F77A00C015E4 /* ActivityDetailViewController.swift in Sources */,
 				DFC9F689208516C1000A7452 /* MainViewController.swift in Sources */,
 				DFC9F682208504D1000A7452 /* ChildController.swift in Sources */,
 				DFC9F69320856821000A7452 /* AddChildViewController.swift in Sources */,
-				DFC9F6762084FE7E000A7452 /* AutismScheduler.xcdatamodeld in Sources */,
-				DFC9F69120854236000A7452 /* CloudKitSynchable.swift in Sources */,
 				DF42B93C208686FA00C015E4 /* Activity.swift in Sources */,
-				DFC9F680208504BF000A7452 /* CloudKitManager.swift in Sources */,
-				DFC9F67A208503E5000A7452 /* Activity+Conveneince.swift in Sources */,
-				DFC9F67C208503F5000A7452 /* Task+Convenience.swift in Sources */,
+				DF42B93E20868B3A00C015E4 /* Task.swift in Sources */,
 				DFC9F68D20851E42000A7452 /* NoChildCollectionViewCell.swift in Sources */,
 				DF42B93A208684F800C015E4 /* Child.swift in Sources */,
+				DF42B9502088F76400C015E4 /* TaskListViewController.swift in Sources */,
+				DF42B94E2088F36300C015E4 /* ActivityListViewController.swift in Sources */,
 				DFC9F686208504E8000A7452 /* TaskController.swift in Sources */,
-				DFC9F678208503D7000A7452 /* Child+Convenience.swift in Sources */,
 				DFC9F684208504DD000A7452 /* ActivityController.swift in Sources */,
 				DFC9F6492084FAD0000A7452 /* AppDelegate.swift in Sources */,
-				DFC9F68F20853F3A000A7452 /* UserDefaultsExtension.swift in Sources */,
 				DFC9F68B20851DC8000A7452 /* ChildCollectionViewCell.swift in Sources */,
+				DF42B94020868E4500C015E4 /* CloudKitManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -599,19 +623,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		DFC9F6742084FE7E000A7452 /* AutismScheduler.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				DFC9F6752084FE7E000A7452 /* AutismScheduler.xcdatamodel */,
-			);
-			currentVersion = DFC9F6752084FE7E000A7452 /* AutismScheduler.xcdatamodel */;
-			path = AutismScheduler.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = DFC9F63D2084FAD0000A7452 /* Project object */;
 }

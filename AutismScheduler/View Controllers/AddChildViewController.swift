@@ -8,25 +8,49 @@
 
 import UIKit
 
-class AddChildViewController: UIViewController {
+protocol AddChildDelegate: class {
+    func viewActivities()
+}
+
+class AddChildViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     // MARK: - Properties
+    @IBOutlet weak var childPhotoButton: UIButton!
     @IBOutlet weak var childImageView: UIImageView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var assignActivitiesButton: UIButton!
     var child: Child?
-    let imagePicker = UIImagePickerController()
+    weak var delegate: AddChildDelegate?
     let childController = ChildController.shared
     
-    @IBAction func imageButtonTapped(_ sender: UIButton) {
-        imagePicker.allowsEditing = true
-        imagePicker.sourceType = .photoLibrary
-        imagePicker.sourceType = .savedPhotosAlbum
-        imagePicker.sourceType = .camera
-        present(imagePicker, animated: true, completion: nil)
+    // MARK: - Life Cycles
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        updateViews()
     }
     
+    // MARK: - Formatting
+    func updateViews() {
+        saveButton.layer.cornerRadius = 5
+        saveButton.layer.borderWidth = 0.1
+        assignActivitiesButton.layer.cornerRadius = 5
+        assignActivitiesButton.layer.borderWidth = 0.1
+        deleteButton.layer.cornerRadius = 5
+        deleteButton.layer.borderWidth = 0.1
+        nameTextField.layer.cornerRadius = 5
+        nameTextField.delegate = self
+        if let child = child {
+            nameTextField.text = child.name
+            childImageView.image = child.image
+            saveButton.setTitle("Update", for: .normal)
+        } else  {
+            saveButton.setTitle("Save", for: .normal)
+        }
+    }
+    
+    // MARK: - Actions
     @IBAction func deleteButtonTapped(_ sender: UIButton) {
         if let child = child {
             deleteConfirmation(child: child)
@@ -35,62 +59,54 @@ class AddChildViewController: UIViewController {
         }
     }
     
+    @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
+        dismiss(animated: true)
+        print("View Dismissed")
+    }
+    
     @IBAction func saveButtonTapped(_ sender: UIButton) {
         save()
-        dismiss(animated: true) {
-            print("Child created")
-        }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        updateViews()
-        setupChildImageView()
+    @IBAction func assignActivitiesButtonTapped(_ sender: UIButton) {
+        save()
+        childController.currentChild = self.child
+        delegate?.viewActivities()
     }
     
-    func updateViews() {
-        saveButton.layer.cornerRadius = 5
-        saveButton.layer.borderWidth = 0.1
-        deleteButton.layer.cornerRadius = 5
-        deleteButton.layer.borderWidth = 0.1
-        nameTextField.layer.cornerRadius = 5
-        if let child = child {
-            nameTextField.text = child.name
-            saveButton.setTitle("Update", for: .normal)
-        } else  {
-            saveButton.setTitle("Save", for: .normal)
-        }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
-    func setupChildImageView() {
-        childImageView.clipsToBounds = true
-        childImageView.layer.cornerRadius = 5
-        childImageView.contentMode = .scaleAspectFill
-    }
-    
+    // MARK: - Saving
     func save() {
-        guard let name = nameTextField.text else { return }
-                if name.isEmpty {
-                    return
-                } else {
-                    if let child = child {
-                        childController.updateChild(child, withName: name)
-                        //childController.updateChildImage(for: child, toImage: image)
-                    } else {
-                        childController.addChild(withName: name)
-                        //ChildController.shared.updateChildImage(for: child, toImage: image)
-                    }
-                }
+        guard let name = nameTextField.text, let image = childImageView.image else { return }
+        //guard let data = UIImageJPEGRepresentation(image, 1) else { return }
+        if name.isEmpty {
+            createEmptyTextAlert()
+            return
+        } else {
+            if let child = child {
+                childController.update(child: child, name: name, image: image)
+            } else {
+                childController.addChild(withName: name, withImage: image)
+            }
+            dismiss(animated: true, completion: {
+                print("Child created")
+            })
+        }
     }
     
+    // MARK: - Alerts
     func deleteConfirmation(child: Child) {
         let deleteConfirmationAlert = UIAlertController(title: "Delete", message: "Are you sure you want to delete this child?", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: { (action) in
             print("Action cancelled")
         })
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (action) in
-            self.childController.removeChild(child)
-            self.dismiss(animated: true, completion: nil)
+            self.childController.deleteChild(child: child)
+            self.dismiss(animated: true)
             print("Child deleted")
         }
         deleteConfirmationAlert.addAction(cancelAction)
@@ -98,32 +114,56 @@ class AddChildViewController: UIViewController {
         self.present(deleteConfirmationAlert, animated: true, completion: nil)
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    func createEmptyTextAlert() {
+        let emptyTextAlert = UIAlertController(title: "Missing Name", message: "A child's name is required to move on.", preferredStyle: .alert)
+        let okayAction = UIAlertAction(title: "OK", style: .default) { (action) in
+            print("Alert dismissed")
+        }
+        emptyTextAlert.addAction(okayAction)
+        self.present(emptyTextAlert, animated: true, completion: nil)
+    }
     
-}
-
-extension AddChildViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    // MARK: - Image Picker
+    @IBAction func imageButtonTapped(_ sender: UIButton) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        
+        let alert = UIAlertController(title: "Select Photo Location", message: nil, preferredStyle: .actionSheet)
+        
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            alert.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: { (_) -> Void in
+                imagePicker.sourceType = .photoLibrary
+                imagePicker.allowsEditing = true
+                self.present(imagePicker, animated: true, completion: nil)
+            }))
+        }
+        
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (_) -> Void in
+                imagePicker.sourceType = .camera
+                imagePicker.allowsEditing = true
+                self.present(imagePicker, animated: true, completion: nil)
+            }))
+        }
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        guard let childImage = info[UIImagePickerControllerOriginalImage] as? UIImage else { return }
-        childImageView.image = childImage
+        if let pickerImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            childImageView.contentMode = .scaleAspectFill
+            childImageView.image = pickerImage
+        }
         dismiss(animated: true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
-    }
-}
-
-extension UIImagePickerController {
-    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
     }
 }
