@@ -10,41 +10,59 @@ import UIKit
 import CloudKit
 
 class Task {
-    private let nameKey = "name"
-    private let imageKey = "image"
-    private let childRefKey = "childRef"
+    
+    //MARK: - Properties
+    static let nameKey = "name"
+    static let imageDataKey = "imageData"
+    static let childRefKey = "childRef"
+    static let activityRefKey = "activityRef"
     static let typeKey = "Task"
     
-    let name: String
-    let image: UIImage?
     weak var child: Child?
+    var name: String
+    var image: UIImage? {
+        guard let imageData = self.imageData else { return nil }
+        return UIImage(data: imageData)
+    }
+    let imageData: Data?
+    var recordType: String { return Task.typeKey }
     var cloudKitRecordID: CKRecordID?
     
-    init(name: String, image: UIImage?, child: Child?) {
+    init(name: String, imageData: Data?) {
         self.name = name
-        self.image = image
-        self.child = child
+        self.imageData = imageData
     }
     
-    init?(cloudKitRecord: CKRecord) {
-        guard let name = cloudKitRecord[nameKey] as? String,
-            let image = cloudKitRecord[imageKey] as? UIImage else { return nil }
-        self.name = name
-        self.image = image
+    convenience required init?(cloudKitRecord: CKRecord) {
+        guard let name = cloudKitRecord[Task.nameKey] as? String,
+            let imageAsset = cloudKitRecord[Task.imageDataKey] as? CKAsset else { return nil }
+        let imageData = try? Data(contentsOf: imageAsset.fileURL)
+        self.init(name: name, imageData: imageData)
         self.cloudKitRecordID = cloudKitRecord.recordID
     }
     
     var cloudKitRecord: CKRecord {
-        let recordID = cloudKitRecordID ?? CKRecordID(recordName: UUID().uuidString)
+        let recordName = UUID().uuidString
+        let recordID = cloudKitRecordID ?? CKRecordID(recordName: recordName)
         let recordType = Task.typeKey
         let record = CKRecord(recordType: recordType, recordID: recordID)
-        record.setValue(name, forKey: nameKey)
-        record.setValue(image, forKey: imageKey)
-        if let child = child,
-            let childRecordID = child.cloudKitRecordID {
-            let childReference = CKReference(recordID: childRecordID, action: .deleteSelf)
-            record.setValue(childReference, forKey: childRefKey)
-        }
+        record[Task.nameKey] = name as CKRecordValue
+        record[Task.imageDataKey] = CKAsset(fileURL: temporaryImageURL)
+        cloudKitRecordID = recordID
+        //        if let child = child,
+        //            let childRecordID = child.cloudKitRecordID {
+        //            let childReference = CKReference(recordID: childRecordID, action: .deleteSelf)
+        //            record.setValue(childReference, forKey: childRefKey)
+        //        }
         return record
+    }
+    
+    fileprivate var temporaryImageURL: URL {
+        let temporaryDirectory = NSTemporaryDirectory()
+        let temporaryDirectoryURL = URL(fileURLWithPath: temporaryDirectory)
+        let pathComponent = UUID().uuidString
+        let fileURL = temporaryDirectoryURL.appendingPathComponent(pathComponent).appendingPathExtension("jpg")
+        try? imageData?.write(to: fileURL, options: [.atomic])
+        return fileURL
     }
 }

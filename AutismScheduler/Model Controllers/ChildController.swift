@@ -17,6 +17,7 @@ protocol ChildControllerDelegate: class {
 
 class ChildController {
     
+    //MARK: - Properties
     static let shared = ChildController()
     let database = CKContainer.default().privateCloudDatabase
     let ckManager = CloudKitManager.shared
@@ -39,7 +40,8 @@ class ChildController {
         guard let data = UIImageJPEGRepresentation(image, 1) else { return }
         let child = Child(name: name, imageData: data)
         children.insert(child, at: 0)
-        ckManager.saveRecordToCloudKit(record: child.cloudKitRecord, database: database) { (record, error) in
+        let record = child.cloudKitRecord
+        ckManager.saveRecordToCloudKit(record: record, database: database) { (record, error) in
             if let error = error {
                 print("Error saving child to CloudKit: \(error.localizedDescription)")
             } else {
@@ -53,15 +55,6 @@ class ChildController {
         child.name = name
         //child.image = image
         saveChildrenToCloudKit()
-//        ckManager.saveRecordToCloudKit(record: child.cloudKitRecord, database: database) { (record, error) in
-//            if let error = error {
-//                print("Error updating child in CloudKit: \(error.localizedDescription)")
-//            } else {
-//                child.cloudKitRecordID = record?.recordID
-//                child.name = name
-//                child.image = image
-//            }
-//        }
     }
     
     func deleteChild(child: Child) {
@@ -77,7 +70,6 @@ class ChildController {
     }
     
     // MARK: - Persistence
-    
     func saveChildrenToCloudKit() {
         let records = children.map({ $0.cloudKitRecord })
         ckManager.saveRecordsToCloudKit(records: records, database: database, perRecordCompletion: nil) { (records, _, error) in
@@ -90,35 +82,36 @@ class ChildController {
     }
     
     private func fetchChildrenFromCloudKit() {
-        ckManager.fetchRecordsOf(type: Child.typeKey, database: database) { (records, error) in
+        let type = Child.typeKey
+        ckManager.fetchRecordsOf(type: type, database: database) { (records, error) in
             if let error = error {
                 print("Error fetching contacts from CloudKit: \(error.localizedDescription)")
             }
             guard let records = records else { return }
             let children = records.compactMap({ Child(cloudKitRecord: $0) })
-//            let group = DispatchGroup()
-//            for child in children {
-//                group.enter()
-//                self.fetchActivitiesFor(child: child, completion: {
-//                    group.leave()
-//                })
-//            }
-//            group.notify(queue: DispatchQueue.main, execute: {
+            let group = DispatchGroup()
+            for child in children {
+                group.enter()
+                self.fetchActivitiesFor(child: child, completion: {
+                    group.leave()
+                })
+            }
+            group.notify(queue: DispatchQueue.main, execute: {
                 self.children = children
-//            })
+            })
         }
     }
     
-//    func fetchActivitiesFor(child: Child, completion: @escaping () -> Void) {
-//        guard let childRecordID = child.cloudKitRecordID else { completion(); return }
-//        let childReference = CKReference(recordID: childRecordID, action: .deleteSelf)
-//        let predicate = NSPredicate(format: "childRef == %@", childReference)
-//        ckManager.fetchRecordsOf(type: Activity.typeKey, predicate: predicate, database: database) { (records, error) in
-//            if let error = error { print("Error fetching activites from CloudKit: \(error.localizedDescription)")}
-//            guard let records = records else { completion(); return }
-//            let activities = records.compactMap({ Activity(cloudKitRecord: $0) })
-//            child.activites = activities
-//            completion()
-//        }
-//    }
+    func fetchActivitiesFor(child: Child, completion: @escaping () -> Void) {
+        guard let childRecordID = child.cloudKitRecordID else { completion(); return }
+        let childReference = CKReference(recordID: childRecordID, action: .deleteSelf)
+        let predicate = NSPredicate(format: "childRef == %@", childReference)
+        ckManager.fetchRecordsOf(type: Activity.typeKey, predicate: predicate, database: database) { (records, error) in
+            if let error = error { print("Error fetching activites from CloudKit: \(error.localizedDescription)")}
+            guard let records = records else { completion(); return }
+            let activities = records.compactMap({ Activity(cloudKitRecord: $0) })
+            child.activites = activities
+            completion()
+        }
+    }
 }

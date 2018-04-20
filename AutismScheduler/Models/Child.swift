@@ -10,6 +10,8 @@ import UIKit
 import CloudKit
 
 class Child {
+    
+    // MARK: - Properties
     static let nameKey = "name"
     static let imageDataKey = "imageData"
     static let typeKey = "Child"
@@ -45,8 +47,6 @@ class Child {
         let record = CKRecord(recordType: recordType, recordID: recordID)
         record[Child.nameKey] = name as CKRecordValue
         record[Child.imageDataKey] = CKAsset(fileURL: temporaryImageURL)
-//        record.setValue(name, forKey: Child.nameKey)
-//        record.setValue(imageData, forKey: Child.imageDataKey)
         cloudKitRecordID = recordID
         return record
     }
