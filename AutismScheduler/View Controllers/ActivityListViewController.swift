@@ -9,15 +9,25 @@
 import UIKit
 
 class ActivityListViewController: UIViewController {
-
+    
+    // MARK: - Outlets
+    @IBOutlet weak var activityNameTextField: UITextField!
+    @IBOutlet weak var selectImageButton: UIButton!
+    @IBOutlet weak var saveImageButton: UIButton!
+    @IBOutlet weak var activityListTableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    // MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    // MARK: - Actions
+    @IBAction func selectImageButtonTapped(_ sender: UIButton) {
     }
-
+    @IBAction func saveImageButtonTapped(_ sender: UIButton) {
+    }
+   
     /*
     // MARK: - Navigation
 
@@ -27,5 +37,4 @@ class ActivityListViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }

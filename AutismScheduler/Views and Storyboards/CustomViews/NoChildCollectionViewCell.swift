@@ -9,5 +9,9 @@
 import UIKit
 
 class NoChildCollectionViewCell: UICollectionViewCell {
-
+    
+    // MARK: - Properties
+    
+    // MARK: - Actions
+    
 }

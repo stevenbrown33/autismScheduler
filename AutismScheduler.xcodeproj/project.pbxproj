@@ -19,6 +19,8 @@
 		DF42B94E2088F36300C015E4 /* ActivityListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF42B94D2088F36300C015E4 /* ActivityListViewController.swift */; };
 		DF42B9502088F76400C015E4 /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF42B94F2088F76400C015E4 /* TaskListViewController.swift */; };
 		DF42B9522088F77A00C015E4 /* ActivityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF42B9512088F77A00C015E4 /* ActivityDetailViewController.swift */; };
+		DF705E3C208A63930038F52A /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF705E3B208A63930038F52A /* ActivityTableViewCell.swift */; };
+		DF705E3E208A87A40038F52A /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF705E3D208A87A40038F52A /* TaskTableViewCell.swift */; };
 		DFC9F6492084FAD0000A7452 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F6482084FAD0000A7452 /* AppDelegate.swift */; };
 		DFC9F64E2084FAD0000A7452 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFC9F64C2084FAD0000A7452 /* Main.storyboard */; };
 		DFC9F6502084FAD6000A7452 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFC9F64F2084FAD6000A7452 /* Assets.xcassets */; };
@@ -57,6 +59,8 @@
 		DF42B94D2088F36300C015E4 /* ActivityListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityListViewController.swift; sourceTree = "<group>"; };
 		DF42B94F2088F76400C015E4 /* TaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
 		DF42B9512088F77A00C015E4 /* ActivityDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailViewController.swift; sourceTree = "<group>"; };
+		DF705E3B208A63930038F52A /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
+		DF705E3D208A87A40038F52A /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 		DFC9F6452084FAD0000A7452 /* AutismScheduler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutismScheduler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFC9F6482084FAD0000A7452 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DFC9F64D2084FAD0000A7452 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -114,6 +118,8 @@
 			children = (
 				DFC9F68A20851DC8000A7452 /* ChildCollectionViewCell.swift */,
 				DFC9F68C20851E42000A7452 /* NoChildCollectionViewCell.swift */,
+				DF705E3B208A63930038F52A /* ActivityTableViewCell.swift */,
+				DF705E3D208A87A40038F52A /* TaskTableViewCell.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -348,10 +354,12 @@
 				DFC9F69320856821000A7452 /* AddChildViewController.swift in Sources */,
 				DF42B93C208686FA00C015E4 /* Activity.swift in Sources */,
 				DF42B93E20868B3A00C015E4 /* Task.swift in Sources */,
+				DF705E3C208A63930038F52A /* ActivityTableViewCell.swift in Sources */,
 				DFC9F68D20851E42000A7452 /* NoChildCollectionViewCell.swift in Sources */,
 				DF42B93A208684F800C015E4 /* Child.swift in Sources */,
 				DF42B9502088F76400C015E4 /* TaskListViewController.swift in Sources */,
 				DF42B94E2088F36300C015E4 /* ActivityListViewController.swift in Sources */,
+				DF705E3E208A87A40038F52A /* TaskTableViewCell.swift in Sources */,
 				DFC9F686208504E8000A7452 /* TaskController.swift in Sources */,
 				DFC9F684208504DD000A7452 /* ActivityController.swift in Sources */,
 				DFC9F6492084FAD0000A7452 /* AppDelegate.swift in Sources */,
