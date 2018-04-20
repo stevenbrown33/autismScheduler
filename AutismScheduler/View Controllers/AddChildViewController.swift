@@ -134,17 +134,17 @@ class AddChildViewController: UIViewController, UIImagePickerControllerDelegate,
         
         let alert = UIAlertController(title: "Select Photo Location", message: nil, preferredStyle: .actionSheet)
         
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            alert.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: { (_) -> Void in
-                imagePicker.sourceType = .photoLibrary
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (_) -> Void in
+                imagePicker.sourceType = .camera
                 imagePicker.allowsEditing = true
                 self.present(imagePicker, animated: true, completion: nil)
             }))
         }
         
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (_) -> Void in
-                imagePicker.sourceType = .camera
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            alert.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: { (_) -> Void in
+                imagePicker.sourceType = .photoLibrary
                 imagePicker.allowsEditing = true
                 self.present(imagePicker, animated: true, completion: nil)
             }))
