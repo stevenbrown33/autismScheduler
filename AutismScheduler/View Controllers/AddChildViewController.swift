@@ -82,7 +82,6 @@ class AddChildViewController: UIViewController, UIImagePickerControllerDelegate,
     // MARK: - Saving
     func save() {
         guard let name = nameTextField.text, let image = childImageView.image else { return }
-        //guard let data = UIImageJPEGRepresentation(image, 1) else { return }
         if name.isEmpty {
             createEmptyTextAlert()
             return
@@ -133,7 +132,6 @@ class AddChildViewController: UIViewController, UIImagePickerControllerDelegate,
         imagePicker.delegate = self
         
         let alert = UIAlertController(title: "Select Photo Location", message: nil, preferredStyle: .actionSheet)
-        
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (_) -> Void in
                 imagePicker.sourceType = .camera
@@ -151,7 +149,6 @@ class AddChildViewController: UIViewController, UIImagePickerControllerDelegate,
         }
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
         present(alert, animated: true, completion: nil)
     }
     

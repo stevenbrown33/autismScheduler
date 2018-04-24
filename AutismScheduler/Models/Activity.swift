@@ -27,11 +27,13 @@ class Activity {
     var recordType: String { return Activity.typeKey }
     var cloudKitRecordID: CKRecordID?
     var tasks: [Task]
+    var isChecked: Bool = false
     
-    init(name: String, imageData: Data?, tasks: [Task] = []) {
+    init(name: String, imageData: Data?, tasks: [Task] = [], isChecked: Bool = false) {
         self.name = name
         self.imageData = imageData
         self.tasks = tasks
+        self.isChecked = isChecked
     }
     
     convenience required init?(cloudKitRecord: CKRecord) {

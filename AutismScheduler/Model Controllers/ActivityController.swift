@@ -9,7 +9,7 @@
 import UIKit
 import CloudKit
 
-let activitiesWereSetNotification = Notification.Name("childrenWereSet")
+let activitiesWereSetNotification = Notification.Name("activitiesWereSet")
 
 protocol ActivityControllerDelegate: class {
     func activitiesUpdated()
@@ -32,11 +32,11 @@ class ActivityController {
     var currentActivity: Activity?
     
     init() {
-        fetchActivitiesFromCloudKit()
+        fetchAllActivitiesFromCloudKit()
     }
     
     // MARK: - CRUD
-    func addActivity(named name: String, withImage image: UIImage?) {
+    func addActivity(named name: String, withImage image: UIImage?, isChecked: Bool = false) {
         guard let image = image else { return }
         guard let data = UIImageJPEGRepresentation(image, 1) else { return }
         let activity = Activity(name: name, imageData: data)
@@ -49,13 +49,16 @@ class ActivityController {
                 activity.cloudKitRecordID = record?.recordID
             }
             self.saveActivitiesToCloudKit()
+            self.fetchAllActivitiesFromCloudKit()
         }
     }
     
-    func update(activity: Activity, name: String, image: UIImage?) {
+    func update(activity: Activity, name: String, image: UIImage?, isChecked: Bool) {
         activity.name = name
         //activity.image = image
+        activity.isChecked = isChecked
         saveActivitiesToCloudKit()
+        fetchAllActivitiesFromCloudKit()
     }
     
     func deleteActivity(activity: Activity) {
@@ -64,10 +67,14 @@ class ActivityController {
             if let error = error {
                 print("Error deleting activity: \(error.localizedDescription)")
             } else {
-                self.fetchActivitiesFromCloudKit()
                 print("Activity deleted")
             }
         }
+    }
+    
+    func toggleIsCheckedFor(activity: Activity) {
+        activity.isChecked = !activity.isChecked
+        saveActivitiesToCloudKit()
     }
     
     // MARK: - Persistence
@@ -82,7 +89,7 @@ class ActivityController {
         }
     }
     
-    func fetchActivitiesFromCloudKit() {
+    func fetchAllActivitiesFromCloudKit() {
         let type = Activity.typeKey
         ckManager.fetchRecordsOf(type: type, database: database) { (records, error) in
             if let error = error {

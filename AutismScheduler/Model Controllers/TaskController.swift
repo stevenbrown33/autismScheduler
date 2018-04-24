@@ -49,6 +49,7 @@ class TaskController {
                 task.cloudKitRecordID = record?.recordID
             }
             self.saveTasksToCloudKit()
+            self.fetchTasksFromCloudKit()
         }
     }
     
@@ -56,6 +57,7 @@ class TaskController {
         task.name = name
         //task.image = image
         saveTasksToCloudKit()
+        fetchTasksFromCloudKit()
     }
     
     func deleteTask(task: Task) {

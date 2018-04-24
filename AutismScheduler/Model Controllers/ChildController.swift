@@ -48,6 +48,7 @@ class ChildController {
                 child.cloudKitRecordID = record?.recordID
             }
             self.saveChildrenToCloudKit()
+            self.fetchChildrenFromCloudKit()
         }
     }
     
@@ -55,6 +56,7 @@ class ChildController {
         child.name = name
         //child.image = image
         saveChildrenToCloudKit()
+        fetchChildrenFromCloudKit()
     }
     
     func deleteChild(child: Child) {
