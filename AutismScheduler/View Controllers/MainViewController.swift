@@ -20,7 +20,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     override func viewDidLoad() {
         super.viewDidLoad()
         formatCollectionView()
-        //formatAddChildButton()
+        //formatButtons()
         notification()
         collectionView.reloadData()
     }
@@ -35,11 +35,10 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        tabBarController?.tabBar.isHidden = false
         navigationController?.isNavigationBarHidden = false
     }
     
-    func formatAddChildButton() {
+    func formatButtons() {
         addChildButton.layer.cornerRadius = 20
         addChildButton.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
         addChildButton.tintColor = .white

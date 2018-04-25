@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DF0CBD932090D5AE0079845E /* AssignedTaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0CBD922090D5AE0079845E /* AssignedTaskTableViewCell.swift */; };
 		DF42B93A208684F800C015E4 /* Child.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF42B939208684F800C015E4 /* Child.swift */; };
 		DF42B93C208686FA00C015E4 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF42B93B208686FA00C015E4 /* Activity.swift */; };
 		DF42B93E20868B3A00C015E4 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF42B93D20868B3A00C015E4 /* Task.swift */; };
@@ -14,7 +15,6 @@
 		DF42B9422087C01B00C015E4 /* TabBarController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF42B9412087C01B00C015E4 /* TabBarController.storyboard */; };
 		DF42B9462087C10700C015E4 /* ActivityList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF42B9452087C10700C015E4 /* ActivityList.storyboard */; };
 		DF42B9482087C11300C015E4 /* TaskList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF42B9472087C11300C015E4 /* TaskList.storyboard */; };
-		DF42B94A2087C11F00C015E4 /* ActivityDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF42B9492087C11F00C015E4 /* ActivityDetail.storyboard */; };
 		DF42B94C2087E82100C015E4 /* AddChild.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF42B94B2087E82100C015E4 /* AddChild.storyboard */; };
 		DF42B94E2088F36300C015E4 /* ActivityListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF42B94D2088F36300C015E4 /* ActivityListViewController.swift */; };
 		DF42B9502088F76400C015E4 /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF42B94F2088F76400C015E4 /* TaskListViewController.swift */; };
@@ -47,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DF0CBD922090D5AE0079845E /* AssignedTaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignedTaskTableViewCell.swift; sourceTree = "<group>"; };
 		DF42B939208684F800C015E4 /* Child.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Child.swift; sourceTree = "<group>"; };
 		DF42B93B208686FA00C015E4 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		DF42B93D20868B3A00C015E4 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
@@ -54,7 +55,6 @@
 		DF42B9412087C01B00C015E4 /* TabBarController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabBarController.storyboard; sourceTree = "<group>"; };
 		DF42B9452087C10700C015E4 /* ActivityList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ActivityList.storyboard; sourceTree = "<group>"; };
 		DF42B9472087C11300C015E4 /* TaskList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TaskList.storyboard; sourceTree = "<group>"; };
-		DF42B9492087C11F00C015E4 /* ActivityDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ActivityDetail.storyboard; sourceTree = "<group>"; };
 		DF42B94B2087E82100C015E4 /* AddChild.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddChild.storyboard; sourceTree = "<group>"; };
 		DF42B94D2088F36300C015E4 /* ActivityListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityListViewController.swift; sourceTree = "<group>"; };
 		DF42B94F2088F76400C015E4 /* TaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
@@ -108,20 +108,20 @@
 				DF42B94B2087E82100C015E4 /* AddChild.storyboard */,
 				DF42B9452087C10700C015E4 /* ActivityList.storyboard */,
 				DF42B9472087C11300C015E4 /* TaskList.storyboard */,
-				DF42B9492087C11F00C015E4 /* ActivityDetail.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
-		DF42B9442087C0E900C015E4 /* CustomViews */ = {
+		DF42B9442087C0E900C015E4 /* CustomCells */ = {
 			isa = PBXGroup;
 			children = (
 				DFC9F68A20851DC8000A7452 /* ChildCollectionViewCell.swift */,
 				DFC9F68C20851E42000A7452 /* NoChildCollectionViewCell.swift */,
 				DF705E3B208A63930038F52A /* ActivityTableViewCell.swift */,
+				DF0CBD922090D5AE0079845E /* AssignedTaskTableViewCell.swift */,
 				DF705E3D208A87A40038F52A /* TaskTableViewCell.swift */,
 			);
-			path = CustomViews;
+			path = CustomCells;
 			sourceTree = "<group>";
 		};
 		DFC9F63C2084FAD0000A7452 = {
@@ -181,7 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				DF42B9432087C0DE00C015E4 /* Storyboards */,
-				DF42B9442087C0E900C015E4 /* CustomViews */,
+				DF42B9442087C0E900C015E4 /* CustomCells */,
 			);
 			path = "Views and Storyboards";
 			sourceTree = "<group>";
@@ -192,8 +192,8 @@
 				DFC9F688208516C1000A7452 /* MainViewController.swift */,
 				DFC9F69220856821000A7452 /* AddChildViewController.swift */,
 				DF42B94D2088F36300C015E4 /* ActivityListViewController.swift */,
-				DF42B94F2088F76400C015E4 /* TaskListViewController.swift */,
 				DF42B9512088F77A00C015E4 /* ActivityDetailViewController.swift */,
+				DF42B94F2088F76400C015E4 /* TaskListViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -327,7 +327,6 @@
 				DFC9F6502084FAD6000A7452 /* Assets.xcassets in Resources */,
 				DF42B9422087C01B00C015E4 /* TabBarController.storyboard in Resources */,
 				DFC9F64E2084FAD0000A7452 /* Main.storyboard in Resources */,
-				DF42B94A2087C11F00C015E4 /* ActivityDetail.storyboard in Resources */,
 				DF42B9462087C10700C015E4 /* ActivityList.storyboard in Resources */,
 				DF42B9482087C11300C015E4 /* TaskList.storyboard in Resources */,
 				DF42B94C2087E82100C015E4 /* AddChild.storyboard in Resources */,
@@ -362,6 +361,7 @@
 				DF705E3E208A87A40038F52A /* TaskTableViewCell.swift in Sources */,
 				DFC9F686208504E8000A7452 /* TaskController.swift in Sources */,
 				DFC9F684208504DD000A7452 /* ActivityController.swift in Sources */,
+				DF0CBD932090D5AE0079845E /* AssignedTaskTableViewCell.swift in Sources */,
 				DFC9F6492084FAD0000A7452 /* AppDelegate.swift in Sources */,
 				DFC9F68B20851DC8000A7452 /* ChildCollectionViewCell.swift in Sources */,
 				DF42B94020868E4500C015E4 /* CloudKitManager.swift in Sources */,

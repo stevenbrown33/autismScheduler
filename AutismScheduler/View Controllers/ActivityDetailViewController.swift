@@ -8,16 +8,36 @@
 
 import UIKit
 
-class ActivityDetailViewController: UIViewController {
-
+class ActivityDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    // MARK: - Properties
+    @IBOutlet weak var activityImageView: UIImageView!
+    @IBOutlet weak var activityNameLabel: UILabel!
+    @IBOutlet weak var assignedTasksTableView: UITableView!
+    @IBOutlet weak var addTaskButton: UIButton!
+    @IBOutlet weak var addTaskImageView: UIImageView!
+    @IBOutlet weak var addTaskLabel: UILabel!
+    
+    var activity: Activity?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+//        assignedTasksTableView.delegate = self
+//        assignedTasksTableView.dataSource = self
+        updateViews()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    func updateViews() {
+        guard let activity = activity else { return }
+        activityImageView.image = activity.image
+        activityNameLabel.text = activity.name
     }
-
+    
+    // MARK: - Actions
+    @IBAction func addTaskButtonTapped(_ sender: Any) {
+        
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -27,5 +47,14 @@ class ActivityDetailViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+    // MARK: - TableView
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return TaskController.shared.tasks.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "assignedTaskCell", for: indexPath) as? AssignedTaskTableViewCell else { return UITableViewCell() }
+        return cell
+    }
 }

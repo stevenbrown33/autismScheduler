@@ -72,6 +72,11 @@ class TaskController {
         }
     }
     
+    func toggleIsCheckedFor(task: Task) {
+        task.isChecked = !task.isChecked
+        saveTasksToCloudKit()
+    }
+    
     // MARK: - Persistence
     func saveTasksToCloudKit() {
         let records = tasks.map({ $0.cloudKitRecord })

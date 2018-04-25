@@ -14,7 +14,7 @@ class Activity {
     //MARK: - Properties
     static let nameKey = "name"
     static let imageDataKey = "imageData"
-    static let childRefKey = "childRef"
+    static let isCheckedKey = "isChecked"
     static let typeKey = "Activity"
     
     weak var child: Child?
@@ -38,9 +38,10 @@ class Activity {
     
     convenience required init?(cloudKitRecord: CKRecord) {
         guard let name = cloudKitRecord[Activity.nameKey] as? String,
-            let imageAsset = cloudKitRecord[Activity.imageDataKey] as? CKAsset else { return nil }
+            let imageAsset = cloudKitRecord[Activity.imageDataKey] as? CKAsset,
+        let isChecked = cloudKitRecord[Activity.isCheckedKey] as? Bool else { return nil }
         let imageData = try? Data(contentsOf: imageAsset.fileURL)
-        self.init(name: name, imageData: imageData)
+        self.init(name: name, imageData: imageData, isChecked: isChecked)
         self.cloudKitRecordID = cloudKitRecord.recordID
     }
     
@@ -51,12 +52,8 @@ class Activity {
         let record = CKRecord(recordType: recordType, recordID: recordID)
         record[Activity.nameKey] = name as CKRecordValue
         record[Activity.imageDataKey] = CKAsset(fileURL: temporaryImageURL)
+        record[Activity.isCheckedKey] = isChecked as CKRecordValue
         cloudKitRecordID = recordID
-//        if let child = child,
-//            let childRecordID = child.cloudKitRecordID {
-//            let childReference = CKReference(recordID: childRecordID, action: .deleteSelf)
-//            record.setValue(childReference, forKey: childRefKey)
-//        }
         return record
     }
     
@@ -67,5 +64,9 @@ class Activity {
         let fileURL = temporaryDirectoryURL.appendingPathComponent(pathComponent).appendingPathExtension("jpg")
         try? imageData?.write(to: fileURL, options: [.atomic])
         return fileURL
+    }
+    
+    func matches(searchString: String) -> Bool {
+        return name.contains(searchString)
     }
 }

@@ -14,7 +14,7 @@ class Task {
     //MARK: - Properties
     static let nameKey = "name"
     static let imageDataKey = "imageData"
-    static let childRefKey = "childRef"
+    static let isCheckedKey = "isChecked"
     static let activityRefKey = "activityRef"
     static let typeKey = "Task"
     
@@ -27,17 +27,20 @@ class Task {
     let imageData: Data?
     var recordType: String { return Task.typeKey }
     var cloudKitRecordID: CKRecordID?
+    var isChecked: Bool = false
     
-    init(name: String, imageData: Data?) {
+    init(name: String, imageData: Data?, isChecked: Bool = false) {
         self.name = name
         self.imageData = imageData
+        self.isChecked = isChecked
     }
     
     convenience required init?(cloudKitRecord: CKRecord) {
         guard let name = cloudKitRecord[Task.nameKey] as? String,
-            let imageAsset = cloudKitRecord[Task.imageDataKey] as? CKAsset else { return nil }
+            let imageAsset = cloudKitRecord[Task.imageDataKey] as? CKAsset,
+        let isChecked = cloudKitRecord[Task.isCheckedKey] as? Bool else { return nil }
         let imageData = try? Data(contentsOf: imageAsset.fileURL)
-        self.init(name: name, imageData: imageData)
+        self.init(name: name, imageData: imageData, isChecked: isChecked)
         self.cloudKitRecordID = cloudKitRecord.recordID
     }
     
@@ -48,12 +51,8 @@ class Task {
         let record = CKRecord(recordType: recordType, recordID: recordID)
         record[Task.nameKey] = name as CKRecordValue
         record[Task.imageDataKey] = CKAsset(fileURL: temporaryImageURL)
+        record[Task.isCheckedKey] = isChecked as CKRecordValue
         cloudKitRecordID = recordID
-        //        if let child = child,
-        //            let childRecordID = child.cloudKitRecordID {
-        //            let childReference = CKReference(recordID: childRecordID, action: .deleteSelf)
-        //            record.setValue(childReference, forKey: childRefKey)
-        //        }
         return record
     }
     
@@ -64,5 +63,9 @@ class Task {
         let fileURL = temporaryDirectoryURL.appendingPathComponent(pathComponent).appendingPathExtension("jpg")
         try? imageData?.write(to: fileURL, options: [.atomic])
         return fileURL
+    }
+    
+    func matches(searchString: String) -> Bool {
+        return name.contains(searchString)
     }
 }

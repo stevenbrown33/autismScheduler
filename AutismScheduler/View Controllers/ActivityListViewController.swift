@@ -8,44 +8,53 @@
 
 import UIKit
 
-class ActivityListViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ActivityTableViewCellDelegate {
+class ActivityListViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ActivityTableViewCellDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     // MARK: - Outlets
     @IBOutlet weak var activityImageView: UIImageView!
     @IBOutlet weak var activityNameTextField: UITextField!
     @IBOutlet weak var selectImageButton: UIButton!
-    @IBOutlet weak var saveImageButton: UIButton!
+    @IBOutlet weak var saveActivityButton: UIButton!
+    @IBOutlet weak var availableActivitiesLabel: UILabel!
     @IBOutlet weak var activityListTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var availableActivitiesLabel: UILabel!
     var activity: Activity?
     let activityController = ActivityController.shared
-    
+    var activities: [Activity] = []
+
     // MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
         activityListTableView.delegate = self
         activityListTableView.dataSource = self
-        updateViews()
+        searchBar.delegate = self
         activityListTableView.reloadData()
+        updateViews()
+        self.activities = activityController.activities
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateViews()
         activityListTableView.reloadData()
+        navigationController?.isNavigationBarHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.isNavigationBarHidden = false
     }
     
     // MARK: - Formatting
     func updateViews() {
         selectImageButton.layer.cornerRadius = 5
         selectImageButton.layer.borderWidth = 0.1
-        saveImageButton.layer.cornerRadius = 5
-        saveImageButton.layer.borderWidth = 0.1
+        saveActivityButton.layer.cornerRadius = 5
+        saveActivityButton.layer.borderWidth = 0.1
         activityNameTextField.layer.cornerRadius = 5
         activityNameTextField.delegate = self
         activityImageView.isHidden = true
-        if activityController.activities.count == 0 {
+        if activities.count == 0 {
             activityListTableView.isHidden = true
             availableActivitiesLabel.isHidden = true
         } else {
@@ -87,15 +96,16 @@ class ActivityListViewController: UIViewController, UITextFieldDelegate, UIImage
         }
     }
     
-    /*
      // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toActivityDetail" {
+            if let indexPath = activityListTableView.indexPathForSelectedRow {
+                let activity = activityController.activities[indexPath.row]
+                guard let detailVC = segue.destination as? ActivityDetailViewController else { return }
+                detailVC.activity = activity
+            }
+        }
      }
-     */
     
     // MARK: - Alerts
     func deleteConfirmation(activity: Activity) {
@@ -164,17 +174,15 @@ class ActivityListViewController: UIViewController, UITextFieldDelegate, UIImage
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-}
 
-extension ActivityListViewController: UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
-    // MARK: - TableVIew Data Source
+    // MARK: - TableVIew
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return activityController.activities.count
+        return activities.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as? ActivityTableViewCell else { return UITableViewCell() }
-        let activity = activityController.activities[indexPath.row]
+        let activity = activities[indexPath.row]
         cell.activity = activity
         cell.delegate = self
         return cell
@@ -186,9 +194,34 @@ extension ActivityListViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let activity = activityController.activities[indexPath.row]
-            activityController.activities.remove(at: indexPath.row)
+            let activity = activities[indexPath.row]
+            activities.remove(at: indexPath.row)
             deleteConfirmation(activity: activity)
         }
+    }
+    
+    // MARK: - SearchBar
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText == "" {
+            self.activities = activityController.activities
+            activityListTableView.reloadData()
+        } else {
+            guard let searchString = searchBar.text else { return }
+            updateActivitySearch(searchString: searchString)
+        }
+    }
+    
+    func updateActivitySearch(searchString: String) {
+        let filteredActivities = activityController.activities.filter({ $0.matches(searchString: searchString) })
+        activities = filteredActivities
+        activityListTableView.reloadData()
     }
 }
