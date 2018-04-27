@@ -67,9 +67,22 @@ class ActivityController {
             if let error = error {
                 print("Error deleting activity: \(error.localizedDescription)")
             } else {
+                self.fetchAllActivitiesFromCloudKit()
                 print("Activity deleted")
             }
         }
+    }
+    
+    func updateChildCheckedActivities(child: Child, activities: [Activity], completion: () -> Void) {
+        for activity in activities {
+            let activityReference = CKReference(record: activity.cloudKitRecord, action: .none)
+            if child.checkedActivities.contains(activityReference) {
+                activity.isChecked = true
+            } else {
+                activity.isChecked = false
+            }
+        }
+        completion()
     }
     
     func toggleIsCheckedFor(activity: Activity, child: Child) {
@@ -86,21 +99,16 @@ class ActivityController {
         ChildController.shared.saveChildToCloudKit(child: child)
     }
     
-    func updateChildCheckedActivities(child: Child, activities: [Activity], completion: () -> Void) {
-        for activity in activities {
-            let activityReference = CKReference(record: activity.cloudKitRecord, action: .none)
-            if child.checkedActivities.contains(activityReference) {
-                activity.isChecked = true
-//                completion()
-            } else {
-                activity.isChecked = false
-//                completion()
+    // MARK: - Persistence
+    func saveActivityToCloudKit(activity: Activity) {
+        let record = activity.cloudKitRecord
+        ckManager.saveRecordToCloudKit(record: record, database: database) { (record, error) in
+            if let error = error {
+                print("Error saving activity to CloudKit. \(error.localizedDescription)")
             }
         }
-        completion()
     }
     
-    // MARK: - Persistence
     func saveActivitiesToCloudKit() {
         let records = activities.map({ $0.cloudKitRecord })
         ckManager.saveRecordsToCloudKit(records: records, database: database, perRecordCompletion: nil) { (records, _, error) in
@@ -138,7 +146,9 @@ class ActivityController {
         let activityReference = CKReference(recordID: activityRecordID, action: .deleteSelf)
         let predicate = NSPredicate(format: "activityRef == %@", activityReference)
         ckManager.fetchRecordsOf(type: Task.typeKey, predicate: predicate, database: database) { (records, error) in
-            if let error = error { print("Error fetching tasks from CloudKit: \(error.localizedDescription)")}
+            if let error = error {
+                print("Error fetching tasks from CloudKit: \(error.localizedDescription)")
+            }
             guard let records = records else { completion(); return }
             let tasks = records.compactMap({ Task(cloudKitRecord: $0) })
             activity.tasks = tasks

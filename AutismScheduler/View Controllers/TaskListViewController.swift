@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 class TaskListViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource, TaskTableViewCellDelegate, UISearchBarDelegate {
     
@@ -26,20 +27,16 @@ class TaskListViewController: UIViewController, UITextFieldDelegate, UIImagePick
     var tasks: [Task] = []
     var child: Child?
     
+    
     // MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let child = ChildController.shared.currentChild else { return }
         self.tasks = taskController.tasks
         taskListTableView.delegate = self
         taskListTableView.dataSource = self
         taskListTableView.reloadData()
-        taskController.updateChildCheckedTasks(child: child) {
-            DispatchQueue.main.async {
-                self.taskListTableView.reloadData()
-            }
-        }
         searchBar.delegate = self
+        taskListTableView.reloadData()
         updateViews()
     }
     
@@ -47,6 +44,12 @@ class TaskListViewController: UIViewController, UITextFieldDelegate, UIImagePick
         super.viewWillAppear(animated)
         updateViews()
         taskListTableView.reloadData()
+        guard let child = ChildController.shared.currentChild else { return }
+        taskController.updateChildCheckedTasks(child: child, tasks: tasks) {
+            DispatchQueue.main.async {
+                self.taskListTableView.reloadData()
+            }
+        }
     }
 
     

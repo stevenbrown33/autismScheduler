@@ -73,7 +73,8 @@ class ChildController {
     
     // MARK: - Persistence
     func saveChildToCloudKit(child: Child) {
-        ckManager.saveRecordToCloudKit(record: child.cloudKitRecord, database: database) { (record, error) in
+        let record = child.cloudKitRecord
+        ckManager.saveRecordToCloudKit(record: record, database: database) { (record, error) in
             if let error = error {
                 print("Error saving child to CloudKit. \(error.localizedDescription)")
             }

@@ -15,8 +15,8 @@ class Task {
     static let nameKey = "name"
     static let imageDataKey = "imageData"
     static let isCheckedKey = "isChecked"
-    static let activityRefKey = "activityRef"
     static let typeKey = "Task"
+    //    static let activityRefKey = "activityRef"
     
     weak var child: Child?
     var name: String

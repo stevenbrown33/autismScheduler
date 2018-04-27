@@ -13,5 +13,17 @@ class AssignedTaskTableViewCell: UITableViewCell {
     // MARK: - Properties
     @IBOutlet weak var taskNameLabel: UILabel!
     @IBOutlet weak var taskImageView: UIImageView!
-    var task: Task?
+    var task: Task? {
+        didSet {
+            updateViews()
+        }
+    }
+    
+    func updateViews() {
+        guard let task = task else { return }
+        if self.task != nil {
+            taskNameLabel.text = task.name
+            taskImageView.image = task.image
+        }
+    }
 }

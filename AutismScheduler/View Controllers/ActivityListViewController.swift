@@ -22,12 +22,11 @@ class ActivityListViewController: UIViewController, UITextFieldDelegate, UIImage
     var activity: Activity?
     let activityController = ActivityController.shared
     var activities: [Activity] = []
-    
     var child: Child?
-
     func setCheckedActivitiesFor(child: Child) {
         for activity in activities {
-            let activityReference = CKReference(record: activity.cloudKitRecord, action: .none)
+            let record = activity.cloudKitRecord
+            let activityReference = CKReference(record: record, action: .none)
             if child.checkedActivities.contains(activityReference) {
                 activity.isChecked = true
             } else {
@@ -53,7 +52,6 @@ class ActivityListViewController: UIViewController, UITextFieldDelegate, UIImage
         activityListTableView.reloadData()
         navigationController?.isNavigationBarHidden = true
         tabBarController?.tabBar.isHidden = false
-
         guard let child = ChildController.shared.currentChild else { return }
         activityController.updateChildCheckedActivities(child: child, activities: activities) {
             DispatchQueue.main.async {
@@ -127,6 +125,7 @@ class ActivityListViewController: UIViewController, UITextFieldDelegate, UIImage
                 let activity = activityController.activities[indexPath.row]
                 guard let detailVC = segue.destination as? ActivityDetailViewController else { return }
                 detailVC.activity = activity
+                detailVC.child = child
             }
         }
      }

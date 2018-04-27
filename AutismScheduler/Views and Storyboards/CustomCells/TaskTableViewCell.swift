@@ -37,10 +37,12 @@ class TaskTableViewCell: UITableViewCell {
     
     func updateVIews() {
         guard let task = task else { return }
-        taskNameLabel.text = task.name
-        taskImageView.image = task.image
-        isChecked = task.isChecked
-        updateSelectionButtonAppearance()
+        if self.task != nil {
+            taskNameLabel.text = task.name
+            taskImageView.image = task.image
+            isChecked = task.isChecked
+            updateSelectionButtonAppearance()
+        }
     }
     
     func updateSelectionButtonAppearance() {
