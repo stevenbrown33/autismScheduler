@@ -80,6 +80,11 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let currentChild = childController.children[indexPath.row]
+        childController.currentChild = currentChild
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if childController.children.count == 0 {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "noChildCell", for: indexPath) as? NoChildCollectionViewCell else { return UICollectionViewCell() }

@@ -72,9 +72,29 @@ class TaskController {
         }
     }
     
-    func toggleIsCheckedFor(task: Task) {
+    func toggleIsCheckedFor(task: Task, child: Child) {
         task.isChecked = !task.isChecked
-        saveTasksToCloudKit()
+        let taskReference = CKReference(record: task.cloudKitRecord, action: .none)
+        if task.isChecked  {
+            child.checkedTasks.append(taskReference)
+        } else {
+            if child.checkedTasks.contains(taskReference) {
+                guard let index = child.checkedTasks.index(of: taskReference) else { return }
+                child.checkedTasks.remove(at: index)
+            }
+        }
+        ChildController.shared.saveChildrenToCloudKit()
+    }
+    
+    func updateChildCheckedTasks(child: Child, completion: () -> Void) {
+        for task in tasks {
+            let taskReference = CKReference(record: task.cloudKitRecord, action: .none)
+            if child.checkedTasks.contains(taskReference) {
+                task.isChecked = true
+            } else {
+                task.isChecked = false
+            }
+        }
     }
     
     // MARK: - Persistence

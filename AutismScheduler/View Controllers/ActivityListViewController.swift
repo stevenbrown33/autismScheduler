@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 class ActivityListViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ActivityTableViewCellDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
@@ -21,16 +22,29 @@ class ActivityListViewController: UIViewController, UITextFieldDelegate, UIImage
     var activity: Activity?
     let activityController = ActivityController.shared
     var activities: [Activity] = []
+    
+    var child: Child?
 
+    func setCheckedActivitiesFor(child: Child) {
+        for activity in activities {
+            let activityReference = CKReference(record: activity.cloudKitRecord, action: .none)
+            if child.checkedActivities.contains(activityReference) {
+                activity.isChecked = true
+            } else {
+                activity.isChecked = false
+            }
+        }
+    }
+    
     // MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.activities = activityController.activities
         activityListTableView.delegate = self
         activityListTableView.dataSource = self
         searchBar.delegate = self
         activityListTableView.reloadData()
         updateViews()
-        self.activities = activityController.activities
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,11 +52,20 @@ class ActivityListViewController: UIViewController, UITextFieldDelegate, UIImage
         updateViews()
         activityListTableView.reloadData()
         navigationController?.isNavigationBarHidden = true
+        tabBarController?.tabBar.isHidden = false
+
+        guard let child = ChildController.shared.currentChild else { return }
+        activityController.updateChildCheckedActivities(child: child, activities: activities) {
+            DispatchQueue.main.async {
+                self.activityListTableView.reloadData()
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.isNavigationBarHidden = false
+        tabBarController?.tabBar.isHidden = true
     }
     
     // MARK: - Formatting
@@ -77,7 +100,8 @@ class ActivityListViewController: UIViewController, UITextFieldDelegate, UIImage
     func selectionButtonTapped(_ sender: ActivityTableViewCell) {
         guard let indexPath = activityListTableView.indexPath(for: sender) else { return }
         let activity = activityController.activities[indexPath.row]
-        activityController.toggleIsCheckedFor(activity: activity)
+        guard let child = ChildController.shared.currentChild else { return }
+        activityController.toggleIsCheckedFor(activity: activity, child: child)
         activityListTableView.reloadRows(at: [indexPath], with: .automatic)
     }
     

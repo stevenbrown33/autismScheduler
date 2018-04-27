@@ -24,16 +24,23 @@ class TaskListViewController: UIViewController, UITextFieldDelegate, UIImagePick
     var task: Task?
     let taskController = TaskController.shared
     var tasks: [Task] = []
+    var child: Child?
     
     // MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        guard let child = ChildController.shared.currentChild else { return }
+        self.tasks = taskController.tasks
         taskListTableView.delegate = self
         taskListTableView.dataSource = self
         taskListTableView.reloadData()
+        taskController.updateChildCheckedTasks(child: child) {
+            DispatchQueue.main.async {
+                self.taskListTableView.reloadData()
+            }
+        }
         searchBar.delegate = self
         updateViews()
-        self.tasks = taskController.tasks
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,10 +48,7 @@ class TaskListViewController: UIViewController, UITextFieldDelegate, UIImagePick
         updateViews()
         taskListTableView.reloadData()
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
+
     
     // MARK: - Formatting
     func updateViews() {
@@ -78,12 +82,13 @@ class TaskListViewController: UIViewController, UITextFieldDelegate, UIImagePick
     func selectionButtonTapped(_ sender: TaskTableViewCell) {
         guard let indexPath = taskListTableView.indexPath(for: sender) else { return }
         let task = taskController.tasks[indexPath.row]
-        taskController.toggleIsCheckedFor(task: task)
+        guard let child = child else { return }
+        taskController.toggleIsCheckedFor(task: task, child: child)
         taskListTableView.reloadRows(at: [indexPath], with: .automatic)
     }
     
     @IBAction func addTasksButtonTapped(_ sender: Any) {
-        
+
     }
     
     // MARK: - Saving

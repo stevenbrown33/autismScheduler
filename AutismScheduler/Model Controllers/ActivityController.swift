@@ -72,9 +72,32 @@ class ActivityController {
         }
     }
     
-    func toggleIsCheckedFor(activity: Activity) {
+    func toggleIsCheckedFor(activity: Activity, child: Child) {
         activity.isChecked = !activity.isChecked
-        saveActivitiesToCloudKit()
+        let activityReference = CKReference(record: activity.cloudKitRecord, action: .none)
+        if activity.isChecked == true {
+            child.checkedActivities.append(activityReference)
+        } else {
+            if child.checkedActivities.contains(activityReference) {
+                guard let index = child.checkedActivities.index(of: activityReference) else { return }
+                child.checkedActivities.remove(at: index)
+            }
+        }
+        ChildController.shared.saveChildToCloudKit(child: child)
+    }
+    
+    func updateChildCheckedActivities(child: Child, activities: [Activity], completion: () -> Void) {
+        for activity in activities {
+            let activityReference = CKReference(record: activity.cloudKitRecord, action: .none)
+            if child.checkedActivities.contains(activityReference) {
+                activity.isChecked = true
+//                completion()
+            } else {
+                activity.isChecked = false
+//                completion()
+            }
+        }
+        completion()
     }
     
     // MARK: - Persistence

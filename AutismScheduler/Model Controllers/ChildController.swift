@@ -72,13 +72,19 @@ class ChildController {
     }
     
     // MARK: - Persistence
+    func saveChildToCloudKit(child: Child) {
+        ckManager.saveRecordToCloudKit(record: child.cloudKitRecord, database: database) { (record, error) in
+            if let error = error {
+                print("Error saving child to CloudKit. \(error.localizedDescription)")
+            }
+        }
+    }
+    
     func saveChildrenToCloudKit() {
         let records = children.map({ $0.cloudKitRecord })
         ckManager.saveRecordsToCloudKit(records: records, database: database, perRecordCompletion: nil) { (records, _, error) in
             if let error = error {
                 print("Error saving child records to CloudKit: \(error.localizedDescription)")
-            } else {
-                print("Successfully saved child records to CloudKit")
             }
         }
     }
@@ -109,7 +115,9 @@ class ChildController {
         let childReference = CKReference(recordID: childRecordID, action: .deleteSelf)
         let predicate = NSPredicate(format: "childRef == %@", childReference)
         ckManager.fetchRecordsOf(type: Activity.typeKey, predicate: predicate, database: database) { (records, error) in
-            if let error = error { print("Error fetching activites from CloudKit: \(error.localizedDescription)")}
+            if let error = error {
+                print("Error fetching activites from CloudKit: \(error.localizedDescription)")
+            }
             guard let records = records else { completion(); return }
             let activities = records.compactMap({ Activity(cloudKitRecord: $0) })
             child.activites = activities

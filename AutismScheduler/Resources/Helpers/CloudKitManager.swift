@@ -16,7 +16,9 @@ class CloudKitManager {
     func saveRecordToCloudKit(record: CKRecord,
                               database: CKDatabase,
                               completion: @escaping (CKRecord?, Error?) -> Void ) {
-        database.save(record, completionHandler: completion)
+        saveRecordsToCloudKit(records: [record], database: database, perRecordCompletion: nil) { (records, _, error) in
+            completion(records?.first, error)
+        }
     }
     
     //SAVES AN ARRAY OF RECORDS AT THE SAME TIME
