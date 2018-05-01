@@ -54,14 +54,11 @@ class AddChildViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBAction func deleteButtonTapped(_ sender: UIButton) {
         if let child = child {
             deleteConfirmation(child: child)
-        } else {
-            print("No child to delete")
         }
     }
     
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
-        print("View Dismissed")
     }
     
     @IBAction func saveButtonTapped(_ sender: UIButton) {
@@ -92,7 +89,6 @@ class AddChildViewController: UIViewController, UIImagePickerControllerDelegate,
                 childController.addChild(withName: name, withImage: image)
             }
             dismiss(animated: true, completion: {
-                print("Child created")
             })
         }
     }
@@ -101,12 +97,10 @@ class AddChildViewController: UIViewController, UIImagePickerControllerDelegate,
     func deleteConfirmation(child: Child) {
         let deleteConfirmationAlert = UIAlertController(title: "Delete", message: "Are you sure you want to delete this child?", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: { (action) in
-            print("Action cancelled")
         })
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (action) in
             self.childController.deleteChild(child: child)
             self.dismiss(animated: true)
-            print("Child deleted")
         }
         deleteConfirmationAlert.addAction(cancelAction)
         deleteConfirmationAlert.addAction(deleteAction)
@@ -116,7 +110,6 @@ class AddChildViewController: UIViewController, UIImagePickerControllerDelegate,
     func createEmptyTextAlert() {
         let emptyTextAlert = UIAlertController(title: "Missing Name", message: "A child's name is required to move on.", preferredStyle: .alert)
         let okayAction = UIAlertAction(title: "OK", style: .default) { (action) in
-            print("Alert dismissed")
         }
         emptyTextAlert.addAction(okayAction)
         self.present(emptyTextAlert, animated: true, completion: nil)
@@ -130,7 +123,6 @@ class AddChildViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBAction func imageButtonTapped(_ sender: UIButton) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        
         let alert = UIAlertController(title: "Select Photo Location", message: nil, preferredStyle: .actionSheet)
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (_) -> Void in

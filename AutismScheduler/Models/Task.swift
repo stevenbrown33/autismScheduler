@@ -12,13 +12,13 @@ import CloudKit
 class Task {
     
     //MARK: - Properties
+    static let typeKey = "Task"
     static let nameKey = "name"
     static let imageDataKey = "imageData"
     static let isCheckedKey = "isChecked"
-    static let typeKey = "Task"
-    //    static let activityRefKey = "activityRef"
+    static let activityRefKey = "activityRef"
     
-    weak var child: Child?
+    weak var activity: Activity?
     var name: String
     var image: UIImage? {
         guard let imageData = self.imageData else { return nil }
@@ -29,18 +29,19 @@ class Task {
     var cloudKitRecordID: CKRecordID?
     var isChecked: Bool = false
     
-    init(name: String, imageData: Data?, isChecked: Bool = false) {
+    init(name: String, imageData: Data?, isChecked: Bool = false, activity: Activity?) {
         self.name = name
         self.imageData = imageData
         self.isChecked = isChecked
+        self.activity = activity
     }
     
-    convenience required init?(cloudKitRecord: CKRecord) {
+    convenience required init?(cloudKitRecord: CKRecord, activity: Activity?) {
         guard let name = cloudKitRecord[Task.nameKey] as? String,
             let imageAsset = cloudKitRecord[Task.imageDataKey] as? CKAsset,
         let isChecked = cloudKitRecord[Task.isCheckedKey] as? Bool else { return nil }
         let imageData = try? Data(contentsOf: imageAsset.fileURL)
-        self.init(name: name, imageData: imageData, isChecked: isChecked)
+        self.init(name: name, imageData: imageData, isChecked: isChecked, activity: activity)
         self.cloudKitRecordID = cloudKitRecord.recordID
     }
     
@@ -49,9 +50,14 @@ class Task {
         let recordID = cloudKitRecordID ?? CKRecordID(recordName: recordName)
         let recordType = Task.typeKey
         let record = CKRecord(recordType: recordType, recordID: recordID)
-        record[Task.nameKey] = name as CKRecordValue
-        record[Task.imageDataKey] = CKAsset(fileURL: temporaryImageURL)
-        record[Task.isCheckedKey] = isChecked as CKRecordValue
+        record.setValue(name, forKey: Task.nameKey)
+        record.setValue(CKAsset(fileURL: temporaryImageURL), forKey: Task.imageDataKey)
+        record.setValue(isChecked, forKey: Task.isCheckedKey)
+        if let activity = activity,
+            let activityRecordID = activity.cloudKitRecordID {
+            let activityReference = CKReference(recordID: activityRecordID, action: .none)
+            record.setValue(activityReference, forKey: Task.activityRefKey)
+        }
         cloudKitRecordID = recordID
         return record
     }

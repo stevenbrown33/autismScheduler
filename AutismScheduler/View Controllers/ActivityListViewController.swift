@@ -38,7 +38,8 @@ class ActivityListViewController: UIViewController, UITextFieldDelegate, UIImage
     // MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.activities = activityController.activities
+        
+      
         activityListTableView.delegate = self
         activityListTableView.dataSource = self
         searchBar.delegate = self
@@ -48,6 +49,9 @@ class ActivityListViewController: UIViewController, UITextFieldDelegate, UIImage
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.child = ChildController.shared.currentChild
+        self.activities = child?.activities ?? []
         updateViews()
         activityListTableView.reloadData()
         navigationController?.isNavigationBarHidden = true
@@ -114,7 +118,6 @@ class ActivityListViewController: UIViewController, UITextFieldDelegate, UIImage
             activityNameTextField.text = ""
             activityImageView.image = nil
             selectImageButton.titleLabel?.text = "Select an Image"
-            print("Activity created")
         }
     }
     
@@ -134,13 +137,11 @@ class ActivityListViewController: UIViewController, UITextFieldDelegate, UIImage
     func deleteConfirmation(activity: Activity) {
         let deleteConfirmationAlert = UIAlertController(title: "Delete", message: "Are you sure you want to delete this activity?", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: { (action) in
-            print("Action cancelled")
         })
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (action) in
             self.activityController.deleteActivity(activity: activity)
             self.activityListTableView.reloadData()
             self.dismiss(animated: true)
-            print("Activity deleted")
         }
         deleteConfirmationAlert.addAction(cancelAction)
         deleteConfirmationAlert.addAction(deleteAction)
@@ -150,7 +151,6 @@ class ActivityListViewController: UIViewController, UITextFieldDelegate, UIImage
     func createMissingInfoAlert() {
         let emptyTextAlert = UIAlertController(title: "Missing Information", message: "An activity name and image is required.", preferredStyle: .alert)
         let okayAction = UIAlertAction(title: "OK", style: .default) { (action) in
-            print("Alert dismissed")
         }
         emptyTextAlert.addAction(okayAction)
         self.present(emptyTextAlert, animated: true, completion: nil)
@@ -234,7 +234,7 @@ class ActivityListViewController: UIViewController, UITextFieldDelegate, UIImage
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText == "" {
-            self.activities = activityController.activities
+            self.activities = child?.activities ?? []
             activityListTableView.reloadData()
         } else {
             guard let searchString = searchBar.text else { return }
@@ -243,8 +243,9 @@ class ActivityListViewController: UIViewController, UITextFieldDelegate, UIImage
     }
     
     func updateActivitySearch(searchString: String) {
-        let filteredActivities = activityController.activities.filter({ $0.matches(searchString: searchString) })
-        activities = filteredActivities
+        guard let activities = child?.activities else { return }
+        let filteredActivities = activities.filter({ $0.matches(searchString: searchString) })
+        self.activities = filteredActivities
         activityListTableView.reloadData()
     }
 }

@@ -21,7 +21,6 @@ class TaskController {
     static let shared = TaskController()
     let database = CKContainer.default().privateCloudDatabase
     let ckManager = CloudKitManager.shared
-    var task: Task?
     var tasks: [Task] = [] {
         didSet {
             DispatchQueue.main.async {
@@ -29,18 +28,17 @@ class TaskController {
             }
         }
     }
-    var currentTask: Task?
-    
+
     init() {
         fetchAllTasksFromCloudKit()
     }
     
     //MARK: - CRUD
-    func addTask(named name: String, withImage image: UIImage?) {
+    func addTask(named name: String, withImage image: UIImage?, activity: Activity, completion: @escaping () -> Void) {
         guard let image = image else { return }
         guard let data = UIImageJPEGRepresentation(image, 1) else { return }
-        let task = Task(name: name, imageData: data)
-        tasks.append(task)
+        let task = Task(name: name, imageData: data, activity: activity)
+        activity.tasks.append(task)
         let record = task.cloudKitRecord
         ckManager.saveRecordToCloudKit(record: record, database: database) { (record, error) in
             if let error = error {
@@ -48,8 +46,7 @@ class TaskController {
             } else {
                 task.cloudKitRecordID = record?.recordID
             }
-            self.saveTasksToCloudKit()
-            self.fetchAllTasksFromCloudKit()
+            completion()
         }
     }
     
@@ -57,8 +54,8 @@ class TaskController {
         task.name = name
         //task.image = image
         task.isChecked = isChecked
-        saveTasksToCloudKit()
-        fetchAllTasksFromCloudKit()
+        saveTaskToCloudKit(task: task) {
+        }
     }
     
     func deleteTask(task: Task) {
@@ -66,14 +63,11 @@ class TaskController {
         database.delete(withRecordID: taskRecordID) { (_, error) in
             if let error = error {
                 print("Error deleting task: \(error.localizedDescription)")
-            } else {
-                self.fetchAllTasksFromCloudKit()
-                print("Task deleted")
             }
         }
     }
     
-    func updateChildCheckedTasks(child: Child, tasks: [Task], completion: () -> Void) {
+    func updateChildCheckedTasks(child: Child, activity: Activity, tasks: [Task], completion: () -> Void) {
         for task in tasks {
             let taskReference = CKReference(record: task.cloudKitRecord, action: .none)
             if child.checkedTasks.contains(taskReference) {
@@ -85,39 +79,49 @@ class TaskController {
         completion()
     }
     
-    func toggleIsCheckedFor(task: Task, child: Child) {
+    // This needs to now pass in an activity as well as a child
+    func toggleIsCheckedFor(task: Task, child: Child, activity: Activity) {
         task.isChecked = !task.isChecked
-        let taskReference = CKReference(record: task.cloudKitRecord, action: .none)
+        let childDict = UserDefaults.standard.value(forKey: child.cloudKitRecord.recordID.recordName) as? [String: Any] ?? [:]
+        var childDictionary = childDict
+        // This is the array of task record IDs that should be checked
+        // Get the array of checked tasks from userDefaults
+        let childName = child.cloudKitRecord.recordID.recordName
+        let activityName = activity.cloudKitRecord.recordID.recordName
+        let taskName = task.cloudKitRecord.recordID.recordName
+        var checkedTasksForActivity = childDictionary[activityName] as? [String] ?? []
+        
         if task.isChecked == true  {
-            child.checkedTasks.append(taskReference)
+            // Add the task that was just checked to the array
+            checkedTasksForActivity.append(taskName)
+            childDictionary[activityName] = checkedTasksForActivity
+            // Save it to UserDefaults
+            UserDefaults.standard.set(childDictionary, forKey: childName)
         } else {
-            if child.checkedTasks.contains(taskReference) {
-                guard let index = child.checkedTasks.index(of: taskReference) else { return }
-                child.checkedTasks.remove(at: index)
+            if checkedTasksForActivity.contains(taskName) {
+            // Instead of checking in the child's array of checked tasks, pull out the activity's array of checked tasks from UserDefaults and do contains on that.
+//            if child.checkedTasks.contains(taskReference) {
+                guard let index = checkedTasksForActivity.index(of: taskName) else { return }
+                // Get the array of checked tasks from userDefaults
+                // Remove the task that was just checked from the array
+                checkedTasksForActivity.remove(at: index)
+                // Save it to UserDefaults
+                UserDefaults.standard.set(childDictionary, forKey: childName)
             }
         }
-        ChildController.shared.saveChildToCloudKit(child: child)
+        ChildController.shared.saveChildToCloudKit(child: child) {
+        }
     }
     
     // MARK: - Persistence
-    func saveTaskToCloudKit(task: Task) {
+    func saveTaskToCloudKit(task: Task, completion: @escaping () -> Void) {
         let record = task.cloudKitRecord
         ckManager.saveRecordToCloudKit(record: record, database: database) { (record, error) in
             if let error = error {
                 print("Error saving task to CloudKit: \(error.localizedDescription)")
             }
         }
-    }
-    
-    func saveTasksToCloudKit() {
-        let records = tasks.map({ $0.cloudKitRecord })
-        ckManager.saveRecordsToCloudKit(records: records, database: database, perRecordCompletion: nil) { (records, _, error) in
-            if let error = error {
-                print("Error saving task records to CloudKit: \(error.localizedDescription)")
-            } else {
-                print("Successfully saved task records to CloudKit")
-            }
-        }
+        completion()
     }
     
     func fetchAllTasksFromCloudKit() {
@@ -127,7 +131,7 @@ class TaskController {
                 print("Error fetching tasks from CloudKit: \(error.localizedDescription)")
             }
             guard let records = records else { return }
-            let tasks = records.compactMap({ Task(cloudKitRecord: $0 )})
+            let tasks = records.compactMap({ Task(cloudKitRecord: $0, activity: nil )})
             self.tasks = tasks
         }
     }

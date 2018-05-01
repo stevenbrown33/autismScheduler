@@ -21,7 +21,6 @@ class ActivityController {
     static let shared = ActivityController()
     let database = CKContainer.default().privateCloudDatabase
     let ckManager = CloudKitManager.shared
-    var activity: Activity?
     var activities: [Activity] = [] {
         didSet {
             DispatchQueue.main.async {
@@ -29,10 +28,10 @@ class ActivityController {
             }
         }
     }
-    var currentActivity: Activity?
     
     init() {
-        fetchAllActivitiesFromCloudKit()
+        fetchAllActivitiesFromCloudKit {
+        }
     }
     
     // MARK: - CRUD
@@ -48,8 +47,8 @@ class ActivityController {
             } else {
                 activity.cloudKitRecordID = record?.recordID
             }
-            self.saveActivitiesToCloudKit()
-            self.fetchAllActivitiesFromCloudKit()
+            self.saveActivityToCloudKit(activity: activity) {
+            }
         }
     }
     
@@ -57,8 +56,8 @@ class ActivityController {
         activity.name = name
         //activity.image = image
         activity.isChecked = isChecked
-        saveActivitiesToCloudKit()
-        fetchAllActivitiesFromCloudKit()
+        saveActivityToCloudKit(activity: activity) {
+        }
     }
     
     func deleteActivity(activity: Activity) {
@@ -67,8 +66,9 @@ class ActivityController {
             if let error = error {
                 print("Error deleting activity: \(error.localizedDescription)")
             } else {
-                self.fetchAllActivitiesFromCloudKit()
-                print("Activity deleted")
+                self.fetchAllActivitiesFromCloudKit {
+                    print("Activities fetched after deleting")
+                }
             }
         }
     }
@@ -96,31 +96,22 @@ class ActivityController {
                 child.checkedActivities.remove(at: index)
             }
         }
-        ChildController.shared.saveChildToCloudKit(child: child)
+        ChildController.shared.saveChildToCloudKit(child: child) {
+        }
     }
     
     // MARK: - Persistence
-    func saveActivityToCloudKit(activity: Activity) {
+    func saveActivityToCloudKit(activity: Activity, completion: @escaping () -> Void) {
         let record = activity.cloudKitRecord
         ckManager.saveRecordToCloudKit(record: record, database: database) { (record, error) in
             if let error = error {
                 print("Error saving activity to CloudKit. \(error.localizedDescription)")
             }
         }
+        completion()
     }
     
-    func saveActivitiesToCloudKit() {
-        let records = activities.map({ $0.cloudKitRecord })
-        ckManager.saveRecordsToCloudKit(records: records, database: database, perRecordCompletion: nil) { (records, _, error) in
-            if let error = error {
-                print("Error saving activity records to CloudKit: \(error.localizedDescription)")
-            } else {
-                print("Sucessfully saved activity records to CloudKit")
-            }
-        }
-    }
-    
-    func fetchAllActivitiesFromCloudKit() {
+    func fetchAllActivitiesFromCloudKit(completion: @escaping () -> Void) {
         let type = Activity.typeKey
         ckManager.fetchRecordsOf(type: type, database: database) { (records, error) in
             if let error = error {
@@ -137,6 +128,7 @@ class ActivityController {
             }
             group.notify(queue: DispatchQueue.main, execute: {
                 self.activities = activities
+                completion()
             })
         }
     }
@@ -150,7 +142,7 @@ class ActivityController {
                 print("Error fetching tasks from CloudKit: \(error.localizedDescription)")
             }
             guard let records = records else { completion(); return }
-            let tasks = records.compactMap({ Task(cloudKitRecord: $0) })
+            let tasks = records.compactMap({ Task(cloudKitRecord: $0, activity: activity) })
             activity.tasks = tasks
             completion()
         }

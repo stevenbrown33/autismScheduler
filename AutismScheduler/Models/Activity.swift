@@ -12,10 +12,10 @@ import CloudKit
 class Activity {
     
     //MARK: - Properties
+    static let typeKey = "Activity"
     static let nameKey = "name"
     static let imageDataKey = "imageData"
     static let isCheckedKey = "isChecked"
-    static let typeKey = "Activity"
     
     weak var child: Child?
     var name: String
@@ -50,9 +50,9 @@ class Activity {
         let recordID = cloudKitRecordID ?? CKRecordID(recordName: recordName)
         let recordType = Activity.typeKey
         let record = CKRecord(recordType: recordType, recordID: recordID)
-        record[Activity.nameKey] = name as CKRecordValue
-        record[Activity.imageDataKey] = CKAsset(fileURL: temporaryImageURL)
-        record[Activity.isCheckedKey] = isChecked as CKRecordValue
+        record.setValue(name, forKey: Activity.nameKey)
+        record.setValue(CKAsset(fileURL: temporaryImageURL), forKey: Activity.imageDataKey)
+        record.setValue(isChecked, forKey: Activity.isCheckedKey)
         cloudKitRecordID = recordID
         return record
     }

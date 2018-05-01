@@ -25,6 +25,7 @@ class TaskListViewController: UIViewController, UITextFieldDelegate, UIImagePick
     var task: Task?
     let taskController = TaskController.shared
     var tasks: [Task] = []
+    var activity: Activity?
     var child: Child?
     
     
@@ -43,15 +44,15 @@ class TaskListViewController: UIViewController, UITextFieldDelegate, UIImagePick
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateViews()
-        taskListTableView.reloadData()
-        guard let child = ChildController.shared.currentChild else { return }
-        taskController.updateChildCheckedTasks(child: child, tasks: tasks) {
+        guard let child = ChildController.shared.currentChild, let activity = activity else { return }
+        taskController.updateChildCheckedTasks(child: child, activity: activity, tasks: tasks) {
             DispatchQueue.main.async {
+                self.updateViews()
                 self.taskListTableView.reloadData()
             }
         }
     }
-
+    
     
     // MARK: - Formatting
     func updateViews() {
@@ -84,14 +85,15 @@ class TaskListViewController: UIViewController, UITextFieldDelegate, UIImagePick
     
     func selectionButtonTapped(_ sender: TaskTableViewCell) {
         guard let indexPath = taskListTableView.indexPath(for: sender) else { return }
-        let task = taskController.tasks[indexPath.row]
-        guard let child = child else { return }
-        taskController.toggleIsCheckedFor(task: task, child: child)
+        guard let task = activity?.tasks[indexPath.row] else { return }
+        guard let child = ChildController.shared.currentChild else { return }
+        guard let activity = activity else { return }
+        taskController.toggleIsCheckedFor(task: task, child: child, activity: activity)
         taskListTableView.reloadRows(at: [indexPath], with: .automatic)
     }
     
     @IBAction func addTasksButtonTapped(_ sender: Any) {
-
+        
     }
     
     // MARK: - Saving
@@ -100,12 +102,15 @@ class TaskListViewController: UIViewController, UITextFieldDelegate, UIImagePick
             createMissingInfoAlert()
             return
         } else {
-            guard let name = taskNameTextField.text, let image = taskImageView.image else { return }
-            taskController.addTask(named: name, withImage: image)
-            taskNameTextField.text = ""
-            taskImageView.image = nil
-            selectImageButton.titleLabel?.text = "Select an Image"
-            print("Task created")
+            guard let name = taskNameTextField.text, let image = taskImageView.image, let activity = activity else { return }
+            taskController.addTask(named: name, withImage: image, activity: activity) {
+                
+                DispatchQueue.main.async {
+                    self.taskNameTextField.text = ""
+                    self.taskImageView.image = nil
+                    self.selectImageButton.titleLabel?.text = "Select an Image"
+                }
+            }
         }
     }
     
@@ -188,10 +193,6 @@ class TaskListViewController: UIViewController, UITextFieldDelegate, UIImagePick
         cell.task = task
         cell.delegate = self
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {

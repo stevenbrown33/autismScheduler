@@ -37,12 +37,21 @@ class ActivityDetailViewController: UIViewController, UITableViewDelegate, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tasks = TaskController.shared.tasks
+        self.tasks = activity?.tasks ?? []
         assignedTasksTableView.delegate = self
         assignedTasksTableView.dataSource = self
         updateViews()
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        assignedTasksTableView.reloadData()
+        
         guard let child = child else { return }
         setCheckedTasksFor(child: child)
+        
+        tasks = tasks.filter({$0.isChecked == true})
     }
     
     func updateViews() {
@@ -56,26 +65,25 @@ class ActivityDetailViewController: UIViewController, UITableViewDelegate, UITab
         
     }
     
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "toTaskList" {
+                guard let detailVC = segue.destination as? TaskListViewController else { return }
+                detailVC.activity = activity
+        }
     }
-    */
     
     // MARK: - TableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let child = ChildController.shared.currentChild else { return 0 }
-        return child.checkedTasks.count
+//        guard let child = ChildController.shared.currentChild else { return 0 }
+        return tasks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "assignedTaskCell", for: indexPath) as? AssignedTaskTableViewCell else { return UITableViewCell() }
-        let child = ChildController.shared.currentChild
-        let task = child?.checkedTasks[indexPath.row]
+        
+        let task = tasks[indexPath.row]
+        cell.task = task
         return cell
     }
 }

@@ -281,7 +281,7 @@
                                         <rect key="frame" x="-0.3333333333333286" y="0.0" width="168.66666666666663" height="35"/>
                                         <connections>
                                             <action selector="addTaskButtonTapped:" destination="llj-cU-ZYo" eventType="touchUpInside" id="Lht-61-vht"/>
-                                            <segue destination="z6V-iA-YiF" kind="show" id="Mw8-ob-a5x"/>
+                                            <segue destination="z6V-iA-YiF" kind="show" identifier="toTaskList" id="Mw8-ob-a5x"/>
                                         </connections>
                                     </button>
                                 </subviews>
