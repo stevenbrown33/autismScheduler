@@ -22,22 +22,7 @@ class Child {
     var imageData: Data?
     var activities: [Activity]
     var checkedActivities: [CKReference]
-    var checkedTasks: [CKReference]
-    
-    var tasksThatAreChecked: [Task] {
-        var allTasks: [Task] = []
-        for activity in activities {
-            allTasks.append(contentsOf: activity.tasks)
-        }
-        var tasksToReturn: [Task] = []
-        for task in allTasks {
-            let taskReference = CKReference(record: task.cloudKitRecord, action: .none)
-            if checkedTasks.contains(taskReference) {
-                tasksToReturn.append(task)
-            }
-        }
-        return tasksToReturn
-    }
+    //var checkedTasks: [CKReference]
     
     var recordType: String { return Child.typeKey }
     var cloudKitRecordID: CKRecordID?
@@ -46,12 +31,11 @@ class Child {
         return UIImage(data: imageData)
     }
     
-    init(name: String, imageData: Data?, activites: [Activity] = [], checkedActivities: [CKReference] = [], checkedTasks: [CKReference] = []) {
+    init(name: String, imageData: Data?, activites: [Activity] = [], checkedActivities: [CKReference] = []) {
         self.name = name
         self.imageData = imageData
         self.activities = activites
         self.checkedActivities = checkedActivities
-        self.checkedTasks = checkedTasks
     }
     
     convenience required init?(cloudKitRecord: CKRecord) {
@@ -59,8 +43,7 @@ class Child {
             let imageAsset = cloudKitRecord[Child.imageDataKey] as? CKAsset else { return nil }
         let imageData = try? Data(contentsOf: imageAsset.fileURL)
         let checkedActivities = cloudKitRecord[Child.checkedActivitiesRefKey] as? [CKReference] ?? []
-        let checkedTasks = cloudKitRecord[Child.checkedTasksRefKey] as? [CKReference] ?? []
-        self.init(name: name, imageData: imageData, checkedActivities: checkedActivities, checkedTasks: checkedTasks)
+        self.init(name: name, imageData: imageData, checkedActivities: checkedActivities)
         self.cloudKitRecordID = cloudKitRecord.recordID
     }
     
@@ -73,9 +56,6 @@ class Child {
         record.setValue(CKAsset(fileURL: temporaryImageURL), forKey: Child.imageDataKey)
         if checkedActivities.count > 0 {
             record.setValue(checkedActivities, forKey: Child.checkedActivitiesRefKey)
-        }
-        if checkedTasks.count > 0 {
-            record.setValue(checkedTasks, forKey: Child.checkedTasksRefKey)
         }
         cloudKitRecordID = recordID
         return record

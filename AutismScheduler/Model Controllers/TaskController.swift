@@ -38,7 +38,7 @@ class TaskController {
         guard let image = image else { return }
         guard let data = UIImageJPEGRepresentation(image, 1) else { return }
         let task = Task(name: name, imageData: data, activity: activity)
-        activity.tasks.append(task)
+        tasks.append(task)
         let record = task.cloudKitRecord
         ckManager.saveRecordToCloudKit(record: record, database: database) { (record, error) in
             if let error = error {
@@ -69,8 +69,15 @@ class TaskController {
     
     func updateChildCheckedTasks(child: Child, activity: Activity, tasks: [Task], completion: () -> Void) {
         for task in tasks {
-            let taskReference = CKReference(record: task.cloudKitRecord, action: .none)
-            if child.checkedTasks.contains(taskReference) {
+            let childName = child.cloudKitRecord.recordID.recordName
+            let activityName = activity.cloudKitRecord.recordID.recordName
+            let taskName = task.cloudKitRecord.recordID.recordName
+            
+            let childDict = UserDefaults.standard.value(forKey: childName) as? [String: Any] ?? [:]
+            var childDictionary = childDict
+            let checkedTasksForActivity = childDictionary[activityName] as? [String] ?? []
+            
+            if checkedTasksForActivity.contains(taskName) {
                 task.isChecked = true
             } else {
                 task.isChecked = false
@@ -82,15 +89,15 @@ class TaskController {
     // This needs to now pass in an activity as well as a child
     func toggleIsCheckedFor(task: Task, child: Child, activity: Activity) {
         task.isChecked = !task.isChecked
-        let childDict = UserDefaults.standard.value(forKey: child.cloudKitRecord.recordID.recordName) as? [String: Any] ?? [:]
-        var childDictionary = childDict
         // This is the array of task record IDs that should be checked
         // Get the array of checked tasks from userDefaults
         let childName = child.cloudKitRecord.recordID.recordName
         let activityName = activity.cloudKitRecord.recordID.recordName
         let taskName = task.cloudKitRecord.recordID.recordName
+        let childDict = UserDefaults.standard.value(forKey: childName) as? [String: Any] ?? [:]
+        var childDictionary = childDict
         var checkedTasksForActivity = childDictionary[activityName] as? [String] ?? []
-        
+    
         if task.isChecked == true  {
             // Add the task that was just checked to the array
             checkedTasksForActivity.append(taskName)
@@ -98,18 +105,16 @@ class TaskController {
             // Save it to UserDefaults
             UserDefaults.standard.set(childDictionary, forKey: childName)
         } else {
-            if checkedTasksForActivity.contains(taskName) {
             // Instead of checking in the child's array of checked tasks, pull out the activity's array of checked tasks from UserDefaults and do contains on that.
 //            if child.checkedTasks.contains(taskReference) {
                 guard let index = checkedTasksForActivity.index(of: taskName) else { return }
                 // Get the array of checked tasks from userDefaults
                 // Remove the task that was just checked from the array
                 checkedTasksForActivity.remove(at: index)
+                childDictionary[activityName] = checkedTasksForActivity
+
                 // Save it to UserDefaults
                 UserDefaults.standard.set(childDictionary, forKey: childName)
-            }
-        }
-        ChildController.shared.saveChildToCloudKit(child: child) {
         }
     }
     

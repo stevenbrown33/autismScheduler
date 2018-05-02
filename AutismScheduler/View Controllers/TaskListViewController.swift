@@ -35,9 +35,11 @@ class TaskListViewController: UIViewController, UITextFieldDelegate, UIImagePick
         self.tasks = taskController.tasks
         taskListTableView.delegate = self
         taskListTableView.dataSource = self
-        taskListTableView.reloadData()
+//        taskListTableView.reloadData()
         searchBar.delegate = self
-        taskListTableView.reloadData()
+//        DispatchQueue.main.async {
+//            self.taskListTableView.reloadData()
+//        }
         updateViews()
     }
     
@@ -79,36 +81,40 @@ class TaskListViewController: UIViewController, UITextFieldDelegate, UIImagePick
     
     // MARK: - Actions
     @IBAction func saveTaskButtonTapped(_ sender: Any) {
-        save()
-        taskListTableView.reloadData()
+        save {
+            DispatchQueue.main.async {
+                self.tasks = self.taskController.tasks
+                self.taskListTableView.reloadData()
+            }
+        }
     }
     
     func selectionButtonTapped(_ sender: TaskTableViewCell) {
         guard let indexPath = taskListTableView.indexPath(for: sender) else { return }
-        guard let task = activity?.tasks[indexPath.row] else { return }
-        guard let child = ChildController.shared.currentChild else { return }
-        guard let activity = activity else { return }
+        guard let child = ChildController.shared.currentChild,
+        let activity = activity else { return }
+        let task = tasks[indexPath.row]
         taskController.toggleIsCheckedFor(task: task, child: child, activity: activity)
         taskListTableView.reloadRows(at: [indexPath], with: .automatic)
     }
     
     @IBAction func addTasksButtonTapped(_ sender: Any) {
-        
+        navigationController?.popViewController(animated: true)
     }
     
     // MARK: - Saving
-    func save() {
+    func save(completion: @escaping () -> Void) {
         if (taskNameTextField.text)?.isEmpty == true || (taskImageView.image) == nil {
             createMissingInfoAlert()
             return
         } else {
             guard let name = taskNameTextField.text, let image = taskImageView.image, let activity = activity else { return }
             taskController.addTask(named: name, withImage: image, activity: activity) {
-                
                 DispatchQueue.main.async {
                     self.taskNameTextField.text = ""
                     self.taskImageView.image = nil
                     self.selectImageButton.titleLabel?.text = "Select an Image"
+                    completion()
                 }
             }
         }

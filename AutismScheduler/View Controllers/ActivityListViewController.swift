@@ -39,7 +39,7 @@ class ActivityListViewController: UIViewController, UITextFieldDelegate, UIImage
     override func viewDidLoad() {
         super.viewDidLoad()
         
-      
+        
         activityListTableView.delegate = self
         activityListTableView.dataSource = self
         searchBar.delegate = self
@@ -51,7 +51,7 @@ class ActivityListViewController: UIViewController, UITextFieldDelegate, UIImage
         super.viewWillAppear(animated)
         
         self.child = ChildController.shared.currentChild
-        self.activities = child?.activities ?? []
+        self.activities = activityController.activities
         updateViews()
         activityListTableView.reloadData()
         navigationController?.isNavigationBarHidden = true
@@ -95,8 +95,14 @@ class ActivityListViewController: UIViewController, UITextFieldDelegate, UIImage
     
     // MARK: - Actions
     @IBAction func saveActivityButtonTapped(_ sender: UIButton) {
-        save()
-        activityListTableView.reloadData()
+        save {
+//            self.activityController.fetchAllActivitiesFromCloudKit {
+                DispatchQueue.main.async {
+                    self.activities = self.activityController.activities
+                    self.activityListTableView.reloadData()
+                }
+//            }
+        }
     }
     
     func selectionButtonTapped(_ sender: ActivityTableViewCell) {
@@ -108,20 +114,24 @@ class ActivityListViewController: UIViewController, UITextFieldDelegate, UIImage
     }
     
     // MARK: - Saving
-    func save() {
+    func save(completion: @escaping () -> Void) {
         if (activityNameTextField.text)?.isEmpty == true || (activityImageView.image) == nil {
             createMissingInfoAlert()
             return
         } else {
             guard let name = activityNameTextField.text, let image = activityImageView.image else { return }
-            activityController.addActivity(named: name, withImage: image)
-            activityNameTextField.text = ""
-            activityImageView.image = nil
-            selectImageButton.titleLabel?.text = "Select an Image"
+            activityController.addActivity(named: name, withImage: image) {
+                DispatchQueue.main.async {
+                    self.activityNameTextField.text = ""
+                    self.activityImageView.image = nil
+                    self.selectImageButton.titleLabel?.text = "Select an Image"
+                    completion()
+                }
+            }
         }
     }
     
-     // MARK: - Navigation
+    // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toActivityDetail" {
             if let indexPath = activityListTableView.indexPathForSelectedRow {
@@ -131,7 +141,7 @@ class ActivityListViewController: UIViewController, UITextFieldDelegate, UIImage
                 detailVC.child = child
             }
         }
-     }
+    }
     
     // MARK: - Alerts
     func deleteConfirmation(activity: Activity) {
@@ -197,7 +207,7 @@ class ActivityListViewController: UIViewController, UITextFieldDelegate, UIImage
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-
+    
     // MARK: - TableVIew
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return activities.count
@@ -209,10 +219,6 @@ class ActivityListViewController: UIViewController, UITextFieldDelegate, UIImage
         cell.activity = activity
         cell.delegate = self
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {

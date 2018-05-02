@@ -35,19 +35,23 @@ class ActivityController {
     }
     
     // MARK: - CRUD
-    func addActivity(named name: String, withImage image: UIImage?, isChecked: Bool = false) {
-        guard let image = image else { return }
-        guard let data = UIImageJPEGRepresentation(image, 1) else { return }
+    func addActivity(named name: String, withImage image: UIImage?, isChecked: Bool = false, completion: @escaping () -> Void) {
+        guard let image = image else { completion(); return }
+        guard let data = UIImageJPEGRepresentation(image, 1) else { completion(); return }
         let activity = Activity(name: name, imageData: data)
         activities.append(activity)
         let record = activity.cloudKitRecord
         ckManager.saveRecordToCloudKit(record: record, database: database) { (record, error) in
             if let error = error {
                 print("Error saving activity to CloudKit: \(error.localizedDescription)")
+                completion()
+                return
             } else {
                 activity.cloudKitRecordID = record?.recordID
             }
+            
             self.saveActivityToCloudKit(activity: activity) {
+                completion()
             }
         }
     }

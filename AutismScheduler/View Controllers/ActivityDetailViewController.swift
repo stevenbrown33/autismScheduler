@@ -21,37 +21,46 @@ class ActivityDetailViewController: UIViewController, UITableViewDelegate, UITab
     
     var activity: Activity?
     var child: Child?
+    var task: Task?
     var tasks: [Task] = []
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        assignedTasksTableView.delegate = self
+        assignedTasksTableView.dataSource = self
+        DispatchQueue.main.async {
+            self.assignedTasksTableView.reloadData()
+        }
+        updateViews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tasks = TaskController.shared.tasks
+        guard let child = child else { return }
+        setCheckedTasksFor(child: child)
+        tasks = tasks.filter({$0.isChecked == true})
+        DispatchQueue.main.async {
+            self.assignedTasksTableView.reloadData()
+        }
+    }
     
     func setCheckedTasksFor(child: Child) {
         for task in tasks {
-            let record = task.cloudKitRecord
-            let taskReference = CKReference(record: record, action: .none)
-            if child.checkedTasks.contains(taskReference) {
+            let childName = child.cloudKitRecord.recordID.recordName
+            let taskName = task.cloudKitRecord.recordID.recordName
+            guard let activityName = activity?.cloudKitRecord.recordID.recordName else { return }
+            
+            let childDict = UserDefaults.standard.value(forKey: childName) as? [String: Any] ?? [:]
+            var childDictionary = childDict
+            let checkedTasksForActivity = childDictionary[activityName] as? [String] ?? []
+            
+            if checkedTasksForActivity.contains(taskName) {
                 task.isChecked = true
             } else {
                 task.isChecked = false
             }
         }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.tasks = activity?.tasks ?? []
-        assignedTasksTableView.delegate = self
-        assignedTasksTableView.dataSource = self
-        updateViews()
-
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        assignedTasksTableView.reloadData()
-        
-        guard let child = child else { return }
-        setCheckedTasksFor(child: child)
-        
-        tasks = tasks.filter({$0.isChecked == true})
     }
     
     func updateViews() {
@@ -68,20 +77,18 @@ class ActivityDetailViewController: UIViewController, UITableViewDelegate, UITab
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toTaskList" {
-                guard let detailVC = segue.destination as? TaskListViewController else { return }
-                detailVC.activity = activity
+            guard let detailVC = segue.destination as? TaskListViewController else { return }
+            detailVC.activity = activity
         }
     }
     
     // MARK: - TableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        guard let child = ChildController.shared.currentChild else { return 0 }
         return tasks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "assignedTaskCell", for: indexPath) as? AssignedTaskTableViewCell else { return UITableViewCell() }
-        
         let task = tasks[indexPath.row]
         cell.task = task
         return cell
