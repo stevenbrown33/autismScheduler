@@ -31,6 +31,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         collectionView.reloadData()
         formatting()
         childrenUpdated()
+        NotificationCenter.default.addObserver(self, selector: #selector(updateCollectionView), name: .updateCollectionView, object: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -58,6 +59,10 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func notification() {
         NotificationCenter.default.addObserver(self, selector: #selector(refreshViews), name: childrenWereSetNotification, object: nil)
+    }
+    
+    @objc func updateCollectionView() {
+        collectionView.reloadData()
     }
     
     @objc func refreshViews() {
@@ -135,4 +140,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func viewActivities() {
         tabBarController?.selectedIndex = 1
     }
+}
+
+extension Notification.Name {
+    static let updateCollectionView = Notification.Name("updateCollectionView")
 }

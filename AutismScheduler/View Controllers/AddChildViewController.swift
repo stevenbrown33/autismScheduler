@@ -119,6 +119,7 @@ class AddChildViewController: UIViewController, UIImagePickerControllerDelegate,
             } else {
                 childController.addChild(withName: name, withImage: image)
             }
+            NotificationCenter.default.post(name: .updateCollectionView, object: nil)
             dismiss(animated: true, completion: {
             })
         }
