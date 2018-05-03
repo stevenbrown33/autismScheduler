@@ -52,7 +52,8 @@ class TaskController {
     
     func update(task: Task, name: String, image: UIImage?, isChecked: Bool) {
         task.name = name
-        //task.image = image
+        guard let image = image else { return }
+        task.imageData = UIImagePNGRepresentation(image)
         task.isChecked = isChecked
         saveTaskToCloudKit(task: task) {
         }

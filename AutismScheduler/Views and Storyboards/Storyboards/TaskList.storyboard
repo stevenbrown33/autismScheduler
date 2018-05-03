@@ -57,6 +57,7 @@
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hIS-UQ-czV">
                                                 <rect key="frame" x="96" y="0.0" width="204" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <state key="normal" title="Select an Image"/>
                                                 <connections>
                                                     <action selector="selectImageButtonTapped:" destination="hDS-oU-oVk" eventType="touchUpInside" id="28E-wy-0Bb"/>
@@ -157,7 +158,7 @@
                                 <rect key="frame" x="-0.66666666666665719" y="689" width="375.33333333333326" height="35"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="nVW-vR-p38">
-                                        <rect key="frame" x="53" y="0.0" width="271" height="35"/>
+                                        <rect key="frame" x="79.333333333333357" y="0.0" width="216.66666666666663" height="35"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add" translatesAutoresizingMaskIntoConstraints="NO" id="kAX-qi-5Ku">
                                                 <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
@@ -165,8 +166,8 @@
                                                     <constraint firstAttribute="width" secondItem="kAX-qi-5Ku" secondAttribute="height" multiplier="1:1" id="nm1-H3-ynk"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Selected Tasks to Activity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0cB-HV-9aV">
-                                                <rect key="frame" x="40" y="7.3333333333333695" width="231" height="20.333333333333329"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Update Required Tasks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0cB-HV-9aV">
+                                                <rect key="frame" x="39.999999999999986" y="7.3333333333333695" width="176.66666666666663" height="20.333333333333329"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -174,7 +175,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ao1-EU-Ukp">
-                                        <rect key="frame" x="53" y="0.0" width="271" height="35"/>
+                                        <rect key="frame" x="79.333333333333357" y="0.0" width="216.66666666666663" height="35"/>
                                         <connections>
                                             <action selector="addTasksButtonTapped:" destination="hDS-oU-oVk" eventType="touchUpInside" id="gYW-du-JV3"/>
                                         </connections>
@@ -223,12 +224,16 @@
                         <outlet property="addTasksImageView" destination="kAX-qi-5Ku" id="HJm-RD-uCF"/>
                         <outlet property="addTasksLabel" destination="0cB-HV-9aV" id="M0j-DL-jyu"/>
                         <outlet property="availableTasksLabel" destination="wLS-In-0jd" id="eK5-pJ-MVz"/>
+                        <outlet property="createTaskLabel" destination="15A-ft-6rm" id="a7w-Ze-kwS"/>
                         <outlet property="saveTaskButton" destination="i2D-vD-c2R" id="sJx-ES-2lN"/>
                         <outlet property="searchBar" destination="69d-zu-h83" id="zSW-Mh-enH"/>
                         <outlet property="selectImageButton" destination="hIS-UQ-czV" id="AUG-D9-Ffx"/>
+                        <outlet property="taskImageLabel" destination="wA1-04-dCk" id="kZk-TO-eKS"/>
                         <outlet property="taskImageView" destination="WNR-XA-FUo" id="Whq-j8-ML3"/>
                         <outlet property="taskListTableView" destination="apC-M8-XSp" id="gWG-eH-P1S"/>
+                        <outlet property="taskNameLabel" destination="ngA-qN-xdf" id="UHT-VN-8De"/>
                         <outlet property="taskNameTextField" destination="B4c-1T-Y19" id="aDk-rM-huU"/>
+                        <outlet property="updateTasksView" destination="LCc-M3-2TX" id="rfp-9t-ufu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dk3-Ze-ETm" userLabel="First Responder" sceneMemberID="firstResponder"/>

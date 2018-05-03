@@ -55,7 +55,8 @@ class ChildController {
     
     func update(child: Child, name: String, image: UIImage?) {
         child.name = name
-        //child.image = image
+        guard let image = image else { return }
+        child.imageData = UIImagePNGRepresentation(image)
         saveChildToCloudKit(child: child) {
         }
     }

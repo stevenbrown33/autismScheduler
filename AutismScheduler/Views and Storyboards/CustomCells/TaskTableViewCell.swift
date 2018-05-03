@@ -40,13 +40,17 @@ class TaskTableViewCell: UITableViewCell {
         if self.task != nil {
             taskNameLabel.text = task.name
             taskImageView.image = task.image
+            taskNameLabel.textColor = .defaultTextColor
             isChecked = task.isChecked
             updateSelectionButtonAppearance()
         }
     }
     
     func updateSelectionButtonAppearance() {
-        let imageName = isChecked ? "selected" : "unselected"
-        isSelectedButton.setImage(UIImage(named: imageName), for: .normal)
+        let selectedImage = UIImage(named: "selected")?.withRenderingMode(.alwaysTemplate)
+        let unselectedImage = UIImage(named: "unselected")?.withRenderingMode(.alwaysTemplate)
+        let imageName = isChecked ? selectedImage : unselectedImage
+        isSelectedButton.setImage(imageName, for: .normal)
+        isSelectedButton.tintColor = .defaultTintColor
     }
 }

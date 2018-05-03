@@ -22,6 +22,7 @@ class AssignedTaskTableViewCell: UITableViewCell {
     func updateViews() {
         guard let task = task else { return }
         if self.task != nil {
+            taskNameLabel.textColor = .defaultTextColor
             taskNameLabel.text = task.name
             taskImageView.image = task.image
         }

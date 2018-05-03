@@ -39,14 +39,19 @@ class ActivityTableViewCell: UITableViewCell {
         guard let activity = activity else { return }
         if self.activity != nil {
             activityNameLabel.text = activity.name
+            activityNameLabel.textColor = .defaultTextColor
             activityImageView.image = activity.image
+            isSelectedButton.tintColor = .defaultTintColor
             isChecked = activity.isChecked
             updateSelectionButtonAppearance()
         }
     }
     
     func updateSelectionButtonAppearance() {
-        let imageName = isChecked ? "selected" : "unselected"
-        isSelectedButton.setImage(UIImage(named: imageName), for: .normal)
+        let selectedImage = UIImage(named: "selected")?.withRenderingMode(.alwaysTemplate)
+        let unselectedImage = UIImage(named: "unselected")?.withRenderingMode(.alwaysTemplate)
+        let imageName = isChecked ? selectedImage : unselectedImage
+        isSelectedButton.setImage(imageName, for: .normal)
+        isSelectedButton.tintColor = .defaultTintColor
     }
 }

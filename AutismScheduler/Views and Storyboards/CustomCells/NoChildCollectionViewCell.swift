@@ -9,4 +9,7 @@
 import UIKit
 
 class NoChildCollectionViewCell: UICollectionViewCell {
+    @IBOutlet weak var noChildrenLabel: UILabel!
+    
+    
 }

@@ -20,7 +20,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create an Activity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Trn-aA-5NF">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create a Reward" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Trn-aA-5NF">
                                 <rect key="frame" x="93.666666666666671" y="96" width="187.66666666666663" height="23"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <nil key="textColor"/>
@@ -32,14 +32,14 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="zRa-M7-V4P">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="30"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activity Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6sI-py-6oQ">
-                                                <rect key="frame" x="0.0" y="0.0" width="111" height="30"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reward Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6sI-py-6oQ">
+                                                <rect key="frame" x="0.0" y="0.0" width="111.33333333333333" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Xi-CU-CYh">
-                                                <rect key="frame" x="118" y="0.0" width="182" height="30"/>
+                                                <rect key="frame" x="118.33333333333336" y="0.0" width="181.66666666666663" height="30"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
@@ -49,14 +49,14 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="fCo-vN-aVV">
                                         <rect key="frame" x="0.0" y="40" width="300" height="30"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activity Image:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PIB-Xu-dS7">
-                                                <rect key="frame" x="0.0" y="0.0" width="112.66666666666667" height="30"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reward Image:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PIB-Xu-dS7">
+                                                <rect key="frame" x="0.0" y="0.0" width="113.33333333333333" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1fV-sw-G8A">
-                                                <rect key="frame" x="117.6666666666667" y="0.0" width="182.33333333333337" height="30"/>
+                                                <rect key="frame" x="118.33333333333336" y="0.0" width="181.66666666666663" height="30"/>
                                                 <state key="normal" title="Select an Image"/>
                                                 <connections>
                                                     <action selector="selectImageButtonTapped:" destination="OwH-Uv-C5u" eventType="touchUpInside" id="fai-oJ-lrG"/>
@@ -66,7 +66,7 @@
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5U-lR-h90">
                                         <rect key="frame" x="75.333333333333357" y="80" width="149.66666666666663" height="30"/>
-                                        <state key="normal" title="Save Activity"/>
+                                        <state key="normal" title="Save Reward"/>
                                         <connections>
                                             <action selector="saveActivityButtonTapped:" destination="OwH-Uv-C5u" eventType="touchUpInside" id="lhe-Ma-7VM"/>
                                         </connections>
@@ -114,7 +114,7 @@
                                                                 <action selector="isSelectedButtonTapped:" destination="SrC-DI-pja" eventType="touchUpInside" id="Iyi-bU-4uk"/>
                                                             </connections>
                                                         </button>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="activityName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vJk-fC-cF3">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="rewardName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vJk-fC-cF3">
                                                             <rect key="frame" x="31" y="1.6666666666666661" width="267" height="23"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                             <nil key="textColor"/>
@@ -148,8 +148,8 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available Activities" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RX4-ei-zyH">
-                                <rect key="frame" x="109" y="259" width="157" height="23"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available Rewards" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RX4-ei-zyH">
+                                <rect key="frame" x="111" y="259" width="153" height="23"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -177,10 +177,13 @@
                     <navigationItem key="navigationItem" id="EDQ-bc-dti"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="activityImageLabel" destination="PIB-Xu-dS7" id="9Gl-wJ-OHB"/>
                         <outlet property="activityImageView" destination="ejL-AW-vYB" id="lrO-mc-Xmv"/>
                         <outlet property="activityListTableView" destination="aL1-nC-YoR" id="ar0-sq-fFA"/>
+                        <outlet property="activityNameLabel" destination="6sI-py-6oQ" id="aCQ-9e-2qY"/>
                         <outlet property="activityNameTextField" destination="9Xi-CU-CYh" id="zHu-0t-7fV"/>
                         <outlet property="availableActivitiesLabel" destination="RX4-ei-zyH" id="gBI-Lu-XYb"/>
+                        <outlet property="createActivityLabel" destination="Trn-aA-5NF" id="7WZ-Yd-JzK"/>
                         <outlet property="saveActivityButton" destination="T5U-lR-h90" id="9Bh-Hu-bTM"/>
                         <outlet property="searchBar" destination="j9o-iu-ZHN" id="BVe-TV-pS9"/>
                         <outlet property="selectImageButton" destination="1fV-sw-G8A" id="0jc-MM-jBp"/>
@@ -204,14 +207,14 @@
                                     <constraint firstAttribute="width" secondItem="5kt-X7-TpE" secondAttribute="height" multiplier="1:1" id="fb2-nG-8l0"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ActivityNameLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ci2-dU-Wej">
-                                <rect key="frame" x="101.66666666666669" y="289" width="172" height="25.333333333333314"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="rewardNameLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ci2-dU-Wej">
+                                <rect key="frame" x="104.99999999999999" y="289" width="165.66666666666663" height="25.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Required Tasks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qEJ-Mh-vHr">
-                                <rect key="frame" x="123.66666666666669" y="329.33333333333331" width="129" height="23"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Required Tasks for Reward" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qEJ-Mh-vHr">
+                                <rect key="frame" x="75.333333333333314" y="329.33333333333331" width="226" height="23"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -258,10 +261,10 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6YH-bP-GgP">
-                                <rect key="frame" x="103.33333333333333" y="689" width="168.66666666666669" height="35"/>
+                                <rect key="frame" x="0.33333333333334281" y="689" width="375" height="35"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Xc0-33-hvT">
-                                        <rect key="frame" x="0.33333333333334281" y="0.0" width="168.66666666666666" height="35"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Xc0-33-hvT">
+                                        <rect key="frame" x="81" y="0.0" width="213" height="35"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add" translatesAutoresizingMaskIntoConstraints="NO" id="giA-sO-AgQ">
                                                 <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
@@ -269,8 +272,8 @@
                                                     <constraint firstAttribute="width" secondItem="giA-sO-AgQ" secondAttribute="height" multiplier="1:1" id="7cT-mN-HKi"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a new Task" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ue-kF-gab">
-                                                <rect key="frame" x="39.999999999999986" y="0.0" width="128.66666666666663" height="35"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Modify Required Tasks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ue-kF-gab">
+                                                <rect key="frame" x="40" y="7.3333333333333695" width="173" height="20.333333333333329"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -278,7 +281,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qhc-RJ-ak3">
-                                        <rect key="frame" x="-0.3333333333333286" y="0.0" width="168.66666666666663" height="35"/>
+                                        <rect key="frame" x="80.666666666666686" y="0.0" width="213" height="35"/>
                                         <connections>
                                             <action selector="addTaskButtonTapped:" destination="llj-cU-ZYo" eventType="touchUpInside" id="Lht-61-vht"/>
                                             <segue destination="z6V-iA-YiF" kind="show" identifier="toTaskList" id="Mw8-ob-a5x"/>
@@ -287,15 +290,15 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="qhc-RJ-ak3" secondAttribute="trailing" id="1dp-t1-JNX"/>
-                                    <constraint firstAttribute="trailing" secondItem="Xc0-33-hvT" secondAttribute="trailing" id="2Kw-Eo-jfn"/>
                                     <constraint firstItem="Xc0-33-hvT" firstAttribute="top" secondItem="6YH-bP-GgP" secondAttribute="top" id="A6P-wS-OpA"/>
                                     <constraint firstAttribute="bottom" secondItem="Xc0-33-hvT" secondAttribute="bottom" id="C5m-Ma-wbf"/>
-                                    <constraint firstAttribute="bottom" secondItem="qhc-RJ-ak3" secondAttribute="bottom" id="WgN-Vy-j4C"/>
-                                    <constraint firstItem="qhc-RJ-ak3" firstAttribute="top" secondItem="6YH-bP-GgP" secondAttribute="top" id="lnn-Cl-kdH"/>
+                                    <constraint firstAttribute="bottom" secondItem="qhc-RJ-ak3" secondAttribute="bottom" id="PeV-FS-d0H"/>
+                                    <constraint firstItem="Xc0-33-hvT" firstAttribute="height" secondItem="6YH-bP-GgP" secondAttribute="height" id="SBt-xn-FqU"/>
+                                    <constraint firstItem="Xc0-33-hvT" firstAttribute="centerX" secondItem="qhc-RJ-ak3" secondAttribute="centerX" id="dST-QL-sA7"/>
+                                    <constraint firstItem="Xc0-33-hvT" firstAttribute="centerX" secondItem="6YH-bP-GgP" secondAttribute="centerX" id="jKK-Ak-hlt"/>
+                                    <constraint firstItem="qhc-RJ-ak3" firstAttribute="width" secondItem="Xc0-33-hvT" secondAttribute="width" id="jbl-hv-oey"/>
                                     <constraint firstAttribute="height" constant="35" id="naF-KA-P22"/>
-                                    <constraint firstItem="Xc0-33-hvT" firstAttribute="leading" secondItem="6YH-bP-GgP" secondAttribute="leading" id="q3C-Ze-0Qi"/>
-                                    <constraint firstItem="qhc-RJ-ak3" firstAttribute="leading" secondItem="6YH-bP-GgP" secondAttribute="leading" id="xas-QB-xGh"/>
+                                    <constraint firstItem="qhc-RJ-ak3" firstAttribute="height" secondItem="Xc0-33-hvT" secondAttribute="height" id="rOA-rY-dmi"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -314,7 +317,7 @@
                             <constraint firstItem="5kt-X7-TpE" firstAttribute="top" secondItem="6Kr-QM-9Lz" secondAttribute="top" constant="3" id="tER-DW-rCA"/>
                             <constraint firstItem="Hqs-R5-fGw" firstAttribute="leading" secondItem="6Kr-QM-9Lz" secondAttribute="leading" constant="10" id="uh9-b8-kco"/>
                             <constraint firstItem="Hqs-R5-fGw" firstAttribute="top" secondItem="qEJ-Mh-vHr" secondAttribute="bottom" constant="5" id="xLd-y7-P3c"/>
-                            <constraint firstItem="6YH-bP-GgP" firstAttribute="width" secondItem="YOv-6h-s0L" secondAttribute="width" multiplier="0.45" id="z88-AN-aj6"/>
+                            <constraint firstItem="6YH-bP-GgP" firstAttribute="width" secondItem="YOv-6h-s0L" secondAttribute="width" id="z88-AN-aj6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Kr-QM-9Lz"/>
                     </view>
@@ -325,6 +328,8 @@
                         <outlet property="addTaskImageView" destination="giA-sO-AgQ" id="oC1-0f-bY3"/>
                         <outlet property="addTaskLabel" destination="6ue-kF-gab" id="Jt9-Vq-RRi"/>
                         <outlet property="assignedTasksTableView" destination="Hqs-R5-fGw" id="pYq-8C-qDs"/>
+                        <outlet property="changeTasksView" destination="6YH-bP-GgP" id="PmO-Zi-n1A"/>
+                        <outlet property="requiredTasksLabel" destination="qEJ-Mh-vHr" id="skZ-sH-9lu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="coR-v5-veR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -339,11 +344,11 @@
             </objects>
             <point key="canvasLocation" x="2102" y="157"/>
         </scene>
-        <!--Item-->
+        <!--Rewards-->
         <scene sceneID="oLo-gn-2dK">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="z0z-W0-IH9" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="SHs-x2-4wX"/>
+                    <tabBarItem key="tabBarItem" title="Rewards" image="complete" id="SHs-x2-4wX"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zhU-5Q-cjh">
@@ -362,6 +367,7 @@
     </scenes>
     <resources>
         <image name="add" width="512" height="512"/>
+        <image name="complete" width="25" height="25"/>
         <image name="unselected" width="256" height="256"/>
     </resources>
 </document>

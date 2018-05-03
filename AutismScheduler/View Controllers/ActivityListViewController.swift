@@ -16,6 +16,9 @@ class ActivityListViewController: UIViewController, UITextFieldDelegate, UIImage
     @IBOutlet weak var activityNameTextField: UITextField!
     @IBOutlet weak var selectImageButton: UIButton!
     @IBOutlet weak var saveActivityButton: UIButton!
+    @IBOutlet weak var createActivityLabel: UILabel!
+    @IBOutlet weak var activityNameLabel: UILabel!
+    @IBOutlet weak var activityImageLabel: UILabel!
     @IBOutlet weak var availableActivitiesLabel: UILabel!
     @IBOutlet weak var activityListTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -38,13 +41,11 @@ class ActivityListViewController: UIViewController, UITextFieldDelegate, UIImage
     // MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         activityListTableView.delegate = self
         activityListTableView.dataSource = self
         searchBar.delegate = self
         activityListTableView.reloadData()
-        updateViews()
+        activityImageView.image = nil
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,6 +53,7 @@ class ActivityListViewController: UIViewController, UITextFieldDelegate, UIImage
         
         self.child = ChildController.shared.currentChild
         self.activities = activityController.activities
+        formatting()
         updateViews()
         activityListTableView.reloadData()
         navigationController?.isNavigationBarHidden = true
@@ -77,6 +79,7 @@ class ActivityListViewController: UIViewController, UITextFieldDelegate, UIImage
         saveActivityButton.layer.cornerRadius = 5
         saveActivityButton.layer.borderWidth = 0.1
         activityNameTextField.layer.cornerRadius = 5
+        activityNameTextField.layer.borderColor = UIColor.defaultTintColor.cgColor
         activityNameTextField.delegate = self
         activityImageView.isHidden = true
         if activities.count == 0 {
@@ -87,21 +90,51 @@ class ActivityListViewController: UIViewController, UITextFieldDelegate, UIImage
             availableActivitiesLabel.isHidden = false
         }
         if activityImageView.image != nil {
-            selectImageButton.titleLabel?.text = "Image Already Selected"
+            selectImageButton.setTitle("Image Selected", for: .normal)
         } else {
-            selectImageButton.titleLabel?.text = "Select an Image"
+            selectImageButton.setTitle("Select an Image", for: .normal)
         }
+    }
+    
+    func formatting() {
+        view.backgroundColor = .defaultBackgroundColor
+//        let backgroundLayer = UIHelper.shared.gradientLayer
+//        backgroundLayer.frame = view.frame
+//        view.layer.insertSublayer(backgroundLayer, at: 0)
+        
+        saveActivityButton.layer.cornerRadius = UIHelper.shared.defaultButtonCornerRadius
+        saveActivityButton.backgroundColor = .defaultButtonColor
+        saveActivityButton.tintColor = .defaultButtonTextColor
+        
+        selectImageButton.layer.cornerRadius = UIHelper.shared.defaultButtonCornerRadius
+        selectImageButton.backgroundColor = .defaultBackgroundColor
+        selectImageButton.tintColor = .defaultTintColor
+        selectImageButton.layer.borderColor = UIColor.defaultTintColor.cgColor
+        
+        createActivityLabel.textColor = .defaultTextColor
+        activityNameLabel.textColor = .defaultTextColor
+        activityImageLabel.textColor = .defaultTextColor
+        availableActivitiesLabel.textColor = .defaultTextColor
+        
+        searchBar.barTintColor = .clear
+        searchBar.backgroundImage = UIImage()
+        searchBar.tintColor = .defaultTintColor
+        
+        activityListTableView.backgroundColor = .clear
+        activityListTableView.separatorStyle = .none
+        
+        tabBarController?.tabBar.tintColor = .defaultTintColor
+        
+        navigationController?.navigationBar.tintColor = .defaultTintColor
     }
     
     // MARK: - Actions
     @IBAction func saveActivityButtonTapped(_ sender: UIButton) {
         save {
-//            self.activityController.fetchAllActivitiesFromCloudKit {
                 DispatchQueue.main.async {
                     self.activities = self.activityController.activities
                     self.activityListTableView.reloadData()
                 }
-//            }
         }
     }
     
@@ -216,6 +249,7 @@ class ActivityListViewController: UIViewController, UITextFieldDelegate, UIImage
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as? ActivityTableViewCell else { return UITableViewCell() }
         let activity = activities[indexPath.row]
+        cell.backgroundColor = .clear
         cell.activity = activity
         cell.delegate = self
         return cell

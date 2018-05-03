@@ -21,6 +21,7 @@ class AddChildViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var assignActivitiesButton: UIButton!
+    @IBOutlet weak var childsNameLabel: UILabel!
     var child: Child?
     weak var delegate: AddChildDelegate?
     let childController = ChildController.shared
@@ -29,6 +30,11 @@ class AddChildViewController: UIViewController, UIImagePickerControllerDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         updateViews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        formatting()
     }
     
     // MARK: - Formatting
@@ -40,6 +46,7 @@ class AddChildViewController: UIViewController, UIImagePickerControllerDelegate,
         deleteButton.layer.cornerRadius = 5
         deleteButton.layer.borderWidth = 0.1
         nameTextField.layer.cornerRadius = 5
+        nameTextField.layer.borderColor = UIColor.defaultTintColor.cgColor
         nameTextField.delegate = self
         if let child = child {
             nameTextField.text = child.name
@@ -48,6 +55,30 @@ class AddChildViewController: UIViewController, UIImagePickerControllerDelegate,
         } else  {
             saveButton.setTitle("Save", for: .normal)
         }
+    }
+    
+    func formatting() {
+        view.backgroundColor = .defaultBackgroundColor
+//        let backgroundLayer = UIHelper.shared.gradientLayer
+//        backgroundLayer.frame = view.frame
+//        view.layer.insertSublayer(backgroundLayer, at: 0)
+        
+        saveButton.layer.cornerRadius = UIHelper.shared.defaultButtonCornerRadius
+        saveButton.backgroundColor = .defaultButtonColor
+        saveButton.tintColor = .defaultButtonTextColor
+        
+        deleteButton.layer.cornerRadius = UIHelper.shared.defaultButtonCornerRadius
+        deleteButton.backgroundColor = .defaultButtonColor
+        deleteButton.tintColor = .defaultButtonTextColor
+        
+        assignActivitiesButton.layer.cornerRadius = UIHelper.shared.defaultButtonCornerRadius
+        assignActivitiesButton.backgroundColor = .defaultButtonColor
+        assignActivitiesButton.tintColor = .defaultButtonTextColor
+        
+        childsNameLabel.textColor = .defaultTextColor
+        
+        navigationController?.navigationBar.tintColor = .defaultTintColor
+        navigationController?.navigationBar.backgroundColor = .clear
     }
     
     // MARK: - Actions
@@ -145,8 +176,9 @@ class AddChildViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let pickerImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        if let pickerImage = info[UIImagePickerControllerEditedImage] as? UIImage {
             childImageView.contentMode = .scaleAspectFill
+            childImageView.image = nil
             childImageView.image = pickerImage
         }
         dismiss(animated: true, completion: nil)

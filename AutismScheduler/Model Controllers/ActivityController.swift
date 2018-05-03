@@ -58,7 +58,8 @@ class ActivityController {
     
     func update(activity: Activity, name: String, image: UIImage?, isChecked: Bool) {
         activity.name = name
-        //activity.image = image
+        guard let image = image else { return }
+        activity.imageData = UIImagePNGRepresentation(image)
         activity.isChecked = isChecked
         saveActivityToCloudKit(activity: activity) {
         }

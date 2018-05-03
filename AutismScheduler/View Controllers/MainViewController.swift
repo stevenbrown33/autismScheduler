@@ -19,8 +19,6 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        formatCollectionView()
-        //formatButtons()
         notification()
         collectionView.reloadData()
     }
@@ -29,7 +27,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = true
         navigationController?.isNavigationBarHidden = true
+        formatCollectionView()
         collectionView.reloadData()
+        formatting()
         childrenUpdated()
     }
     
@@ -38,10 +38,17 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         navigationController?.isNavigationBarHidden = false
     }
     
-    func formatButtons() {
-        addChildButton.layer.cornerRadius = 20
-        addChildButton.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-        addChildButton.tintColor = .white
+    func formatting() {
+        view.backgroundColor = .defaultBackgroundColor
+//        let backgroundLayer = UIHelper.shared.gradientLayer
+//        backgroundLayer.frame = view.frame
+//        view.layer.insertSublayer(backgroundLayer, at: 0)
+        
+        addChildButton.layer.cornerRadius = UIHelper.shared.defaultButtonCornerRadius
+        addChildButton.backgroundColor = .defaultButtonColor
+        addChildButton.tintColor = .defaultButtonTextColor
+        
+        navigationController?.navigationBar.tintColor = .defaultTintColor
     }
     
     func childrenUpdated() {

@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -78,7 +77,7 @@
                                                     <constraint firstAttribute="height" constant="40" id="hjl-eM-Ba3"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                <state key="normal" title="View &amp; Assign Activities"/>
+                                                <state key="normal" title="View &amp; Activate Rewards"/>
                                                 <connections>
                                                     <action selector="assignActivitiesButtonTapped:" destination="UHz-6x-HrE" eventType="touchUpInside" id="F99-wt-usf"/>
                                                 </connections>
@@ -135,6 +134,7 @@
                         <outlet property="assignActivitiesButton" destination="jiJ-sr-AAf" id="jy4-TE-V8r"/>
                         <outlet property="childImageView" destination="Ple-XI-kwk" id="pHg-EG-aPV"/>
                         <outlet property="childPhotoButton" destination="AYQ-pt-wDk" id="SiQ-4J-gdj"/>
+                        <outlet property="childsNameLabel" destination="5gJ-Yk-tmT" id="rgt-7a-VjH"/>
                         <outlet property="deleteButton" destination="W6F-Kc-xrF" id="QkB-BG-dUV"/>
                         <outlet property="nameTextField" destination="ztT-QZ-e80" id="z1D-sh-WwS"/>
                         <outlet property="saveButton" destination="tE1-ad-8dG" id="nLU-tg-Xmy"/>

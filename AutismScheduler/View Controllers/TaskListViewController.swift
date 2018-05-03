@@ -22,12 +22,17 @@ class TaskListViewController: UIViewController, UITextFieldDelegate, UIImagePick
     @IBOutlet weak var addTasksButton: UIButton!
     @IBOutlet weak var addTasksImageView: UIImageView!
     @IBOutlet weak var addTasksLabel: UILabel!
+    @IBOutlet weak var updateTasksView: UIView!
+    @IBOutlet weak var createTaskLabel: UILabel!
+    @IBOutlet weak var taskNameLabel: UILabel!
+    @IBOutlet weak var taskImageLabel: UILabel!
+    
+    
     var task: Task?
     let taskController = TaskController.shared
     var tasks: [Task] = []
     var activity: Activity?
     var child: Child?
-    
     
     // MARK: - Life Cycles
     override func viewDidLoad() {
@@ -35,16 +40,12 @@ class TaskListViewController: UIViewController, UITextFieldDelegate, UIImagePick
         self.tasks = taskController.tasks
         taskListTableView.delegate = self
         taskListTableView.dataSource = self
-//        taskListTableView.reloadData()
         searchBar.delegate = self
-//        DispatchQueue.main.async {
-//            self.taskListTableView.reloadData()
-//        }
-        updateViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        formatting()
         updateViews()
         guard let child = ChildController.shared.currentChild, let activity = activity else { return }
         taskController.updateChildCheckedTasks(child: child, activity: activity, tasks: tasks) {
@@ -73,10 +74,47 @@ class TaskListViewController: UIViewController, UITextFieldDelegate, UIImagePick
             availableTasksLabel.isHidden = false
         }
         if taskImageView.image != nil {
-            selectImageButton.titleLabel?.text = "Image Already Selected"
+            selectImageButton.setTitle("Image Selected", for: .normal)
         } else {
-            selectImageButton.titleLabel?.text = "Select an Image"
+            selectImageButton.setTitle("Select an Image", for: .normal)
         }
+    }
+    
+    func formatting() {
+        view.backgroundColor = .defaultBackgroundColor
+//        let backgroundLayer = UIHelper.shared.gradientLayer
+//        backgroundLayer.frame = view.frame
+//        view.layer.insertSublayer(backgroundLayer, at: 0)
+        
+        saveTaskButton.layer.cornerRadius = UIHelper.shared.defaultButtonCornerRadius
+        saveTaskButton.backgroundColor = .defaultButtonColor
+        saveTaskButton.tintColor = .defaultButtonTextColor
+        
+        selectImageButton.layer.cornerRadius = UIHelper.shared.defaultButtonCornerRadius
+        selectImageButton.backgroundColor = .defaultBackgroundColor
+        selectImageButton.tintColor = .defaultTintColor
+        selectImageButton.layer.borderColor = UIColor.defaultTintColor.cgColor
+        
+        createTaskLabel.textColor = .defaultTextColor
+        taskNameLabel.textColor = .defaultTextColor
+        taskImageLabel.textColor = .defaultTextColor
+        availableTasksLabel.textColor = .defaultTextColor
+        
+        addTasksLabel.textColor = .defaultTextColor
+        addTasksImageView.image = addTasksImageView.image?.withRenderingMode(.alwaysTemplate)
+        addTasksImageView.tintColor = .defaultTintColor
+        
+        updateTasksView.backgroundColor = .clear
+        
+        searchBar.barTintColor = .clear
+        searchBar.backgroundImage = UIImage()
+        searchBar.tintColor = .defaultTintColor
+        
+        taskListTableView.backgroundColor = .clear
+        taskListTableView.separatorStyle = .none
+        
+        navigationController?.navigationBar.tintColor = .defaultTintColor
+        navigationController?.navigationBar.backgroundColor = .clear
     }
     
     // MARK: - Actions
@@ -113,7 +151,6 @@ class TaskListViewController: UIViewController, UITextFieldDelegate, UIImagePick
                 DispatchQueue.main.async {
                     self.taskNameTextField.text = ""
                     self.taskImageView.image = nil
-                    self.selectImageButton.titleLabel?.text = "Select an Image"
                     completion()
                 }
             }
@@ -172,6 +209,10 @@ class TaskListViewController: UIViewController, UITextFieldDelegate, UIImagePick
             }))
         }
         
+        alert.addAction(UIAlertAction(title: "Clipart", style: .default, handler: { (_) in
+            
+        }))
+        
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
@@ -196,6 +237,7 @@ class TaskListViewController: UIViewController, UITextFieldDelegate, UIImagePick
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as? TaskTableViewCell else { return UITableViewCell() }
         let task = tasks[indexPath.row]
+        cell.backgroundColor = .clear
         cell.task = task
         cell.delegate = self
         return cell

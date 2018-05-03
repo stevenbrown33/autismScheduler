@@ -40,7 +40,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No children available" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2GR-VT-Skm">
                                                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -51,6 +51,9 @@
                                             <constraint firstItem="2GR-VT-Skm" firstAttribute="leading" secondItem="MA9-0B-Pv5" secondAttribute="leading" id="rDr-vm-ulL"/>
                                             <constraint firstAttribute="bottom" secondItem="2GR-VT-Skm" secondAttribute="bottom" id="z2O-sg-YJd"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="noChildrenLabel" destination="2GR-VT-Skm" id="cIJ-Sx-pb7"/>
+                                        </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="childCell" id="Hf0-iC-FSU" customClass="ChildCollectionViewCell" customModule="AutismScheduler" customModuleProvider="target">
                                         <rect key="frame" x="255" y="98" width="200" height="200"/>
@@ -152,11 +155,11 @@
             </objects>
             <point key="canvasLocation" x="306" y="-613"/>
         </scene>
-        <!--Item-->
+        <!--Children-->
         <scene sceneID="9OT-EN-NtG">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Dd0-4u-OVl" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="CLl-Nb-dTD"/>
+                    <tabBarItem key="tabBarItem" title="Children" image="TabBarImageChild" id="CLl-Nb-dTD"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qN7-yc-VSV">
@@ -173,6 +176,9 @@
             <point key="canvasLocation" x="-974" y="-613"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="TabBarImageChild" width="24" height="24"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="BHT-qn-dYb"/>
     </inferredMetricsTieBreakers>

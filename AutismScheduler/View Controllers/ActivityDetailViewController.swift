@@ -18,6 +18,8 @@ class ActivityDetailViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var addTaskButton: UIButton!
     @IBOutlet weak var addTaskImageView: UIImageView!
     @IBOutlet weak var addTaskLabel: UILabel!
+    @IBOutlet weak var changeTasksView: UIView!
+    @IBOutlet weak var requiredTasksLabel: UILabel!
     
     var activity: Activity?
     var child: Child?
@@ -31,7 +33,6 @@ class ActivityDetailViewController: UIViewController, UITableViewDelegate, UITab
         DispatchQueue.main.async {
             self.assignedTasksTableView.reloadData()
         }
-        updateViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,6 +44,8 @@ class ActivityDetailViewController: UIViewController, UITableViewDelegate, UITab
         DispatchQueue.main.async {
             self.assignedTasksTableView.reloadData()
         }
+        formatting()
+        updateViews()
     }
     
     func setCheckedTasksFor(child: Child) {
@@ -69,6 +72,28 @@ class ActivityDetailViewController: UIViewController, UITableViewDelegate, UITab
         activityNameLabel.text = activity.name
     }
     
+    func formatting() {
+        view.backgroundColor = .defaultBackgroundColor
+//        let backgroundLayer = UIHelper.shared.gradientLayer
+//        backgroundLayer.frame = view.frame
+//        view.layer.insertSublayer(backgroundLayer, at: 0)
+        
+        activityNameLabel.textColor = .defaultTextColor
+        requiredTasksLabel.textColor = .defaultTextColor
+        
+        addTaskLabel.textColor = .defaultTextColor
+        addTaskImageView.image = addTaskImageView.image?.withRenderingMode(.alwaysTemplate)
+        addTaskImageView.tintColor = .defaultTintColor
+        
+        assignedTasksTableView.backgroundColor = .clear
+        assignedTasksTableView.separatorStyle = .none
+        
+        changeTasksView.backgroundColor = .clear
+        
+        navigationController?.navigationBar.tintColor = .defaultTintColor
+        navigationController?.navigationBar.backgroundColor = .clear
+    }
+    
     // MARK: - Actions
     @IBAction func addTaskButtonTapped(_ sender: Any) {
         
@@ -90,6 +115,7 @@ class ActivityDetailViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "assignedTaskCell", for: indexPath) as? AssignedTaskTableViewCell else { return UITableViewCell() }
         let task = tasks[indexPath.row]
+        cell.backgroundColor = .clear
         cell.task = task
         return cell
     }

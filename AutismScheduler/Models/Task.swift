@@ -24,7 +24,7 @@ class Task {
         guard let imageData = self.imageData else { return nil }
         return UIImage(data: imageData)
     }
-    let imageData: Data?
+    var imageData: Data?
     var recordType: String { return Task.typeKey }
     var cloudKitRecordID: CKRecordID?
     var isChecked: Bool = false
