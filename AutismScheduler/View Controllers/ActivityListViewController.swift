@@ -224,6 +224,10 @@ class ActivityListViewController: UIViewController, UITextFieldDelegate, UIImage
                 self.present(imagePicker, animated: true, completion: nil)
             }))
         }
+//        
+//        alert.addAction(UIAlertAction(title: "Clipart", style: .default, handler: { (_) -> Void in
+//            
+//        }))
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)

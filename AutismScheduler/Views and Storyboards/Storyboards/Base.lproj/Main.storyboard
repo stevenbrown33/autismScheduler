@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -40,7 +39,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No children available" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2GR-VT-Skm">
                                                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" red="0.19215686274509802" green="0.0" blue="0.5607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -73,7 +72,7 @@
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="nameLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RAg-W1-QHn">
                                                                 <rect key="frame" x="0.0" y="0.0" width="200" height="50"/>
-                                                                <color key="backgroundColor" red="0.31202411167512689" green="0.31202411167512689" blue="0.31202411167512689" alpha="0.63819028253424659" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="backgroundColor" red="0.31202411167512689" green="0.31202411167512689" blue="0.31202411167512689" alpha="0.19868364726027396" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -83,6 +82,7 @@
                                                             <constraint firstItem="RAg-W1-QHn" firstAttribute="top" secondItem="G50-gb-jeC" secondAttribute="top" id="BT0-lX-mbw"/>
                                                             <constraint firstItem="RAg-W1-QHn" firstAttribute="leading" secondItem="G50-gb-jeC" secondAttribute="leading" id="EPN-e2-aAc"/>
                                                             <constraint firstAttribute="trailing" secondItem="RAg-W1-QHn" secondAttribute="trailing" id="HfV-Gk-Wa0"/>
+                                                            <constraint firstItem="RAg-W1-QHn" firstAttribute="width" secondItem="G50-gb-jeC" secondAttribute="width" id="MnG-V8-YhB"/>
                                                             <constraint firstAttribute="bottom" secondItem="RAg-W1-QHn" secondAttribute="bottom" id="ics-R3-UTy"/>
                                                         </constraints>
                                                     </view>
@@ -98,6 +98,7 @@
                                             <constraint firstItem="Hu4-Xb-4JT" firstAttribute="top" secondItem="Hf0-iC-FSU" secondAttribute="top" id="5Ie-yr-EYH"/>
                                             <constraint firstAttribute="bottom" secondItem="Hu4-Xb-4JT" secondAttribute="bottom" id="Kgy-PI-l3G"/>
                                             <constraint firstItem="Hu4-Xb-4JT" firstAttribute="leading" secondItem="Hf0-iC-FSU" secondAttribute="leading" id="Yfn-Bm-C8g"/>
+                                            <constraint firstItem="G50-gb-jeC" firstAttribute="width" secondItem="Hu4-Xb-4JT" secondAttribute="width" id="hVp-nA-EQ2"/>
                                             <constraint firstItem="xrI-iA-gDo" firstAttribute="height" secondItem="Hu4-Xb-4JT" secondAttribute="height" multiplier="0.25" id="r8B-9A-beH"/>
                                             <constraint firstAttribute="trailing" secondItem="Hu4-Xb-4JT" secondAttribute="trailing" id="tD3-15-uiz"/>
                                         </constraints>

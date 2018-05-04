@@ -23,6 +23,9 @@
 		DF575E18209A555A0017B58F /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF575E17209A555A0017B58F /* UIHelper.swift */; };
 		DF705E3C208A63930038F52A /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF705E3B208A63930038F52A /* ActivityTableViewCell.swift */; };
 		DF705E3E208A87A40038F52A /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF705E3D208A87A40038F52A /* TaskTableViewCell.swift */; };
+		DFA03504209CB6C7006904AB /* ClipArt.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFA03503209CB6C7006904AB /* ClipArt.storyboard */; };
+		DFA03506209CB83F006904AB /* ClipArtCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA03505209CB83F006904AB /* ClipArtCollectionViewController.swift */; };
+		DFA03508209CB95E006904AB /* ClipArtCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA03507209CB95E006904AB /* ClipArtCollectionViewCell.swift */; };
 		DFC9F6492084FAD0000A7452 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9F6482084FAD0000A7452 /* AppDelegate.swift */; };
 		DFC9F64E2084FAD0000A7452 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFC9F64C2084FAD0000A7452 /* Main.storyboard */; };
 		DFC9F6502084FAD6000A7452 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFC9F64F2084FAD6000A7452 /* Assets.xcassets */; };
@@ -65,6 +68,9 @@
 		DF575E17209A555A0017B58F /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		DF705E3B208A63930038F52A /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
 		DF705E3D208A87A40038F52A /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
+		DFA03503209CB6C7006904AB /* ClipArt.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ClipArt.storyboard; sourceTree = "<group>"; };
+		DFA03505209CB83F006904AB /* ClipArtCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipArtCollectionViewController.swift; sourceTree = "<group>"; };
+		DFA03507209CB95E006904AB /* ClipArtCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipArtCollectionViewCell.swift; sourceTree = "<group>"; };
 		DFC9F6452084FAD0000A7452 /* AutismScheduler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutismScheduler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFC9F6482084FAD0000A7452 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DFC9F64D2084FAD0000A7452 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -112,6 +118,7 @@
 				DF42B94B2087E82100C015E4 /* AddChild.storyboard */,
 				DF42B9452087C10700C015E4 /* ActivityList.storyboard */,
 				DF42B9472087C11300C015E4 /* TaskList.storyboard */,
+				DFA03503209CB6C7006904AB /* ClipArt.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -124,6 +131,7 @@
 				DF705E3B208A63930038F52A /* ActivityTableViewCell.swift */,
 				DF0CBD922090D5AE0079845E /* AssignedTaskTableViewCell.swift */,
 				DF705E3D208A87A40038F52A /* TaskTableViewCell.swift */,
+				DFA03507209CB95E006904AB /* ClipArtCollectionViewCell.swift */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -199,6 +207,7 @@
 				DF42B94D2088F36300C015E4 /* ActivityListViewController.swift */,
 				DF42B9512088F77A00C015E4 /* ActivityDetailViewController.swift */,
 				DF42B94F2088F76400C015E4 /* TaskListViewController.swift */,
+				DFA03505209CB83F006904AB /* ClipArtCollectionViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -329,6 +338,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFA03504209CB6C7006904AB /* ClipArt.storyboard in Resources */,
 				DFC9F6532084FAD6000A7452 /* LaunchScreen.storyboard in Resources */,
 				DFC9F6502084FAD6000A7452 /* Assets.xcassets in Resources */,
 				DF42B9422087C01B00C015E4 /* TabBarController.storyboard in Resources */,
@@ -364,7 +374,9 @@
 				DFC9F68D20851E42000A7452 /* NoChildCollectionViewCell.swift in Sources */,
 				DF42B93A208684F800C015E4 /* Child.swift in Sources */,
 				DF42B9502088F76400C015E4 /* TaskListViewController.swift in Sources */,
+				DFA03506209CB83F006904AB /* ClipArtCollectionViewController.swift in Sources */,
 				DF42B94E2088F36300C015E4 /* ActivityListViewController.swift in Sources */,
+				DFA03508209CB95E006904AB /* ClipArtCollectionViewCell.swift in Sources */,
 				DF575E18209A555A0017B58F /* UIHelper.swift in Sources */,
 				DF705E3E208A87A40038F52A /* TaskTableViewCell.swift in Sources */,
 				DFC9F686208504E8000A7452 /* TaskController.swift in Sources */,
@@ -543,7 +555,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.stevenbrown.AutismScheduler;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -562,7 +574,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.stevenbrown.AutismScheduler;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
